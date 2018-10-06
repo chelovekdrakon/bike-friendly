@@ -4,13 +4,24 @@ import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
 
-const Div = styled.div`
-    background-color: white;
+const Body = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1;
 `;
+const Header = styled.div``;
+const Main = styled.div``;
+const Footer = styled.div``;
 
 
 const Home = props => (
-    <Div> Home </Div>
+    <Body>
+        <Header>Hellw</Header>
+        <Main>My name is BIKE-FRIENDLY</Main>
+        <Footer>(c) Bike-friendly</Footer>
+    </Body>
 );
 
 Home.defaultProps = {

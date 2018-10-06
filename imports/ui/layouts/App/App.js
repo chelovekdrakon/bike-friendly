@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
@@ -17,18 +17,36 @@ import { Authenticated } from '/imports/ui/components'
 import styled from 'styled-components';
 
 
+const Header = styled.div`
+
+`;
+
+const Main = styled.div`
+    flex: 1 0 auto;
+`;
+
+const Footer = styled.div`
+    flex-shrink: 0;
+`;
+
 const App = props => (
     <Router>
-        <Switch>
-            <Route exact name="index" path="/" component={Home}/>
+        <Fragment>
+            <Header>APP HEADER</Header>
+            <Main>
+                <Switch>
+                    <Route exact name="index" path="/" component={Home} />
 
-            <Authenticated exact path="/profile" component={Me} {...props} />
-            <Authenticated exact path="/map" component={MapPage} {...props} />
+                    <Authenticated exact path="/profile" component={Me} {...props} />
+                    <Authenticated exact path="/map" component={MapPage} {...props} />
 
-            <Route path="/login" component={Login} {...props} />
+                    <Route path="/login" component={Login} {...props} />
 
-            <Route component={NotFound}/>
-        </Switch>
+                    <Route path="/" component={NotFound} />
+                </Switch>
+            </Main>
+            <Footer>APP FOOTER</Footer>
+        </Fragment>
     </Router>
 );
 

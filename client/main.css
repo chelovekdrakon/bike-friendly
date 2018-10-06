@@ -1,4 +1,22 @@
+html, body, .viewport {
+  height: 100%;
+}
+
+html {
+  font-size: 10px;
+}
+
 body {
-  padding: 10px;
-  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+
+body > * {
+  font-size: 1.6rem;
 }
