@@ -62,32 +62,37 @@ class Map extends PureComponent {
   }
 
   handleVote() {
+    const constPermlik = "test12345";
+      
+    const acc = "test3";
+      
     function sendRequest(status, data) {
-      const constPermlik = "test12345";
-      const acc = "test3",
-        pass = "qwerty12345",
-        wif = "5Hvp79CaQrYUD9d33VvdtWY5BhyimS4t5vMDCBJE1WsTUUPuu1F",
-        author = "test3",
-        parentPermlink = "let-me-live-let-me-breath",
-        permLink = "veloboys",
-        body = data,
-        title = "TITLE";
+        const context = {};
+
+        const pass = "qwerty12345",
+            wif = "5Hvp79CaQrYUD9d33VvdtWY5BhyimS4t5vMDCBJE1WsTUUPuu1F",
+            author = "test3",
+            parentPermlink = "let-me-live-let-me-breath",
+            permLink = "veloboys",
+            body = data,
+            title = "TITLE";
+
       if (status == "comment") {
-        this.parentAuthor = author;
-        this.parentPermlink = parentPermlink;
-        this.permlink = String(Math.floor(Math.random() * (10000 - 1 + 1)) + 1);
+        context.parentAuthor = author;
+        context.parentPermlink = parentPermlink;
+        context.permlink = String(Math.floor(Math.random() * (10000 - 1 + 1)) + 1);
       } else {
-        this.parentAuthor = "";
-        this.parentPermlink = parentPermlink;
-        this.permlink = permLink;
+        context.parentAuthor = "";
+        context.parentPermlink = parentPermlink;
+        context.permlink = permLink;
       }
 
       window.golos.broadcast.comment(
         wif,
-        this.parentAuthor,
-        this.parentPermlink,
+        context.parentAuthor,
+        context.parentPermlink,
         author,
-        this.permlink,
+        context.permlink,
         title,
         body,
         "",
@@ -100,17 +105,18 @@ class Map extends PureComponent {
     }
 
     if (this.state.place) {
-      console.log(this.state.place);
-      window.golos.api.getContent(acc, constPermlik, function(err, result) {
-        console.log(result);
-        result.id == 0
-          ? sendRequest("post", this.state.place)
-          : sendRequest("comment", this.state.place);
-        if (err) console.error(err);
-      });
-    } else {
-      console.log("choose the place");
-    }
+        const place = this.state;
+
+        window.golos.api.getContent(acc, constPermlik, function(err, result) {
+          console.log(result);
+          result.id == 0
+            ? sendRequest("post", place)
+            : sendRequest("comment", place);
+          if (err) console.error(err);
+        });
+      } else {
+        console.log("choose the place");
+      }
   }
 
   render() {
