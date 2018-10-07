@@ -105,12 +105,12 @@ class Map extends PureComponent {
     }
 
     if (this.state.place) {
-        const place = this.state;
+        const place = { ...this.state.place };
 
         window.golos.api.getContent(acc, constPermlik, function(err, result) {
           console.log(result);
           result.id == 0
-            ? sendRequest("post", place)
+            ? sendRequest("post", `place: ${place.placeId}, lng: ${place.lng}, lat: ${place.lat}`)
             : sendRequest("comment", place);
           if (err) console.error(err);
         });
@@ -123,12 +123,12 @@ class Map extends PureComponent {
     return (
       <Container>
         <GoogleMap
-          googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVFInxP4hbkJFbLz_L9XzRYUb3RaggzQc&v=3.exp&libraries=geometry,drawing,places"
-          loadingElement={<div style={{ height: `100%` }} />}
-          containerElement={<div style={{ height: `400px` }} />}
-          mapElement={<div style={{ height: `100%` }} />}
-          onPlacePick={this.onPlacePick}
-          {...this.props}
+            googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVFInxP4hbkJFbLz_L9XzRYUb3RaggzQc&v=3.exp&libraries=geometry,drawing,places"
+            loadingElement={<div style={{ height: `100%` }} />}
+            containerElement={<div style={{ height: `400px` }} />}
+            mapElement={<div style={{ height: `100%` }} />}
+            onPlacePick={this.onPlacePick}
+            {...this.props}
         />
         <Button onClick={this.handleVote}>VOTE</Button>
       </Container>
