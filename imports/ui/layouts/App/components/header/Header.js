@@ -8,7 +8,7 @@ import styled from 'styled-components';
 const StyledLink = styled(Link)`
     color: palevioletred;
     display: flex;
-    text-decoration: none;
+    text-decoration: ${props => props.underline || 'none'};
     color: green;
     margin: 0 0.5rem;
 
@@ -42,6 +42,27 @@ const Col = styled.div`
 
 const UserMenu = styled.div`
     display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
+
+const Button = styled.button`
+    border: 0.1rem solid black;
+    border-radius: 0.3rem;
+    margin: 1rem 0;
+    padding: 0.4rem 2rem;
+    font-size: 1.5rem;
+    min-width: 10%;
+
+    :focus {
+        outline: none;
+    }
+
+    :hover {
+        cursor: pointer;
+        color: red;
+        border-color: red;
+    }
 `;
 
 class Header extends PureComponent {
@@ -73,6 +94,13 @@ class Header extends PureComponent {
                         <Logo src="https://via.placeholder.com/80x80" />
                     </StyledLink>  
                 </Col>
+                <Col align="flex-end">
+                    {
+                        user && (
+                            <StyledLink underline="underline" to="/map"> Map </StyledLink>
+                        )
+                    }
+                </Col>
                 <Col />
                 <Col />
                 <Col justify="flex-end"> 
@@ -99,8 +127,8 @@ class Header extends PureComponent {
                             </Fragment>  
                         ) : (
                             <UserMenu>
-                                <button onClick={this.handleLogout}> Logout </button>
-                                <p> { user.username } </p>
+                                <StyledLink to="/profile"> { user.username.toUpperCase() } </StyledLink>
+                                <Button onClick={this.handleLogout}> Logout </Button>
                             </UserMenu>
                         )
                     }
