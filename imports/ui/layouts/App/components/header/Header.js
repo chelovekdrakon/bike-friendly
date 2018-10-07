@@ -1,4 +1,5 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, PureComponent } from 'react';
+import { Meteor } from 'meteor/meteor';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -39,44 +40,75 @@ const Col = styled.div`
     justify-content: ${props => props.justify || 'flex-start'};
 `;
 
-const Header = ({ isAuth, user }) => (
-    <Container>
-        <Col align="center">
-            <StyledLink to="/">
-                <Logo src="https://via.placeholder.com/80x80" />
-            </StyledLink>  
-        </Col>
-        <Col />
-        <Col />
-        <Col justify="flex-end"> 
-            {
-                !isAuth ? (
-                    <Fragment>
-                        <StyledLink 
-                            to={{
-                                pathname: '/login',
-                                isNew: false
-                            }}
-                        > 
-                            Sign-in 
-                        </StyledLink>  
-                        / 
-                        <StyledLink 
-                            to={{
-                                pathname: '/login',
-                                isNew: true
-                            }}
-                        > 
-                            Sign-up 
-                        </StyledLink>
-                    </Fragment>  
-                ) : (
-                    <p> { user.username } </p>
-                )
+const UserMenu = styled.div`
+    display: flex;
+`;
+
+class Header extends PureComponent {
+    constructor(props) {
+        super(props);
+        this.state = {  };
+
+        this.handleLogout = this.handleLogout.bind(this)
+        
+    }
+
+    handleLogout() {
+        Meteor.logout((err) => {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log('success logout');
             }
-        </Col>
-    </Container>
-);
+        });
+    }
+    
+    render() {
+        const { isAuth, user } = this.props;
+        
+        return (
+            <Container>
+                <Col align="center">
+                    <StyledLink to="/">
+                        <Logo src="https://via.placeholder.com/80x80" />
+                    </StyledLink>  
+                </Col>
+                <Col />
+                <Col />
+                <Col justify="flex-end"> 
+                    {
+                        !isAuth ? (
+                            <Fragment>
+                                <StyledLink 
+                                    to={{
+                                        pathname: '/login',
+                                        isNew: false
+                                    }}
+                                > 
+                                    Sign-in 
+                                </StyledLink>  
+                                / 
+                                <StyledLink 
+                                    to={{
+                                        pathname: '/login',
+                                        isNew: true
+                                    }}
+                                > 
+                                    Sign-up 
+                                </StyledLink>
+                            </Fragment>  
+                        ) : (
+                            <UserMenu>
+                                <button onClick={this.handleLogout}> Logout </button>
+                                <p> { user.username } </p>
+                            </UserMenu>
+                        )
+                    }
+                </Col>
+            </Container>
+        );
+    }
+};
 
 Header.defaultProps = {
     

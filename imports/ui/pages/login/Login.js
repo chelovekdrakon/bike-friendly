@@ -91,7 +91,14 @@ class Login extends PureComponent {
 
         userId && history.push('/');
     }
-    
+
+    componentWillReceiveProps (nextProps) {
+        const { userId, history } = this.props;
+
+        if (nextProps.userId && nextProps.userId !== userId) {
+            history.push('/');
+        }
+    }
 
     handleUsernameChange({ target: { value }}) {
         this.setState({ username: value });
@@ -118,36 +125,29 @@ class Login extends PureComponent {
     loginUser() {
         const {
             username,
-            password
+            password,
+            history
         } = this.state;
 
         Meteor.loginWithPassword(username, password, (err) => {
             if (err) {
                 console.log(err);
             } else {
-                console.log('success login');
+                console.log('success');
             }
         });
     }
 
     registerUser() {
         const {
-            username,
-            email,
-            password
+            history
         } = this.state;
 
         Accounts.createUser(this.state, (err) => {
             if (err) {
                 console.log(err);
             } else {
-                Accounts.loginWithPassword(username, password, (err) => {
-                    if (err) {
-                        console.log(err);
-                    } else {
-                        console.log('success login');
-                    }
-                });
+                console.log('success');
             }
         });
     }
