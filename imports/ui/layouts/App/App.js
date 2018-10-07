@@ -8,8 +8,7 @@ import {
     Home,
     Me,
     MapPage,
-    Login,
-    NotFound
+    Login
 } from '/imports/ui/pages';
 
 import { Authenticated } from '/imports/ui/components'
@@ -30,23 +29,6 @@ class App extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {  };
-
-        this.onPlacePick = this.onPlacePick.bind(this)
-        
-    }
-
-    onPlacePick({ placeId, latLng }) {
-        if (placeId) {
-            console.log('place id: ', placeId);
-
-            const lat = latLng.lat();
-            const lng = latLng.lng();
-
-            console.log('lat: ', lat);
-            console.log('lng: ', lng);
-
-            // fetch(`https://maps.googleapis.com/maps/api/place/details/output?key=AIzaSyAVFInxP4hbkJFbLz_L9XzRYUb3RaggzQc&placeid=${placeId}`, { mode: 'no-cors' }));
-        }
     }
 
     render() {
@@ -57,18 +39,7 @@ class App extends PureComponent {
                     <Main>
                         <Switch>
                             <Authenticated exact path="/profile" component={Me} {...this.props} />
-                            <Authenticated 
-                                exact 
-                                path="/map" 
-                                component={MapPage} 
-                                {...this.props} 
-                                googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVFInxP4hbkJFbLz_L9XzRYUb3RaggzQc&v=3.exp&libraries=geometry,drawing,places"
-                                loadingElement={<div style={{ height: `100%` }} />}
-                                containerElement={<div style={{ height: `400px` }} />}
-                                mapElement={<div style={{ height: `100%` }} />}
-                                onPlacePick={this.onPlacePick}
-                            />
-
+                            <Authenticated exact path="/map" component={MapPage} {...this.props} />
                             <Route exact path="/login" render={(routerProps) => <Login {...this.props} {...routerProps} />} />
 
                             <Route render={(routerProps) => <Home {...this.props} {...routerProps} />} />
