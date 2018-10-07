@@ -19,11 +19,12 @@ const Div = styled.div`
 
 const MapPage = withScriptjs(withGoogleMap(props =>
     <GoogleMap
-      defaultZoom={8}
-      defaultCenter={{ lat: -34.397, lng: 150.644 }}
+      defaultZoom={13}
+      defaultCenter={{ lat: 40.415033, lng: -3.723795 }}
+      onClick={props.onPlacePick}
     >
       <Marker
-        position={{ lat: -34.397, lng: 150.644 }}
+        position={{ lat: 40.415033, lng: -3.723795 }}
       />
     </GoogleMap>
   ));

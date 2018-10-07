@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
@@ -26,49 +26,60 @@ const Footer = styled.div`
     flex-shrink: 0;
 `;
 
-const App = props => (
-    <Router>
-        <Fragment>
-            <Header isAuth={props.authenticated} user={props.user} />
-            <Main>
-                <Switch>
-                    <Authenticated exact path="/profile" component={Me} {...props} />
-                    <Authenticated 
-                        exact 
-                        path="/map" 
-                        component={MapPage} 
-                        {...props} 
-                        googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVFInxP4hbkJFbLz_L9XzRYUb3RaggzQc&v=3.exp&libraries=geometry,drawing,places"
-                        loadingElement={<div style={{ height: `100%` }} />}
-                        containerElement={<div style={{ height: `400px` }} />}
-                        mapElement={<div style={{ height: `100%` }} />}
-                    />
+class App extends PureComponent {
+    constructor(props) {
+        super(props);
+        this.state = {  };
 
-                    <Route exact path="/login" render={(routerProps) => <Login {...props} {...routerProps} />} />
+        this.onPlacePick = this.onPlacePick.bind(this)
+        
+    }
 
-                    <Route render={(routerProps) => <Home {...props} {...routerProps} />} />
-                </Switch>
-            </Main>
-            <Footer>APP FOOTER</Footer>
-        </Fragment>
-    </Router>
-);
+    onPlacePick({ placeId, latLng }) {
+        if (placeId) {
+            console.log('place id: ', placeId);
 
-// const App = props => (
-//     <Router>
-//         <Switch>
-//             <Route exact path="/" component={Home}/>
-//         </Switch>
-//     </Router>
-// );
+            const lat = latLng.lat();
+            const lng = latLng.lng();
 
-App.defaultProps = {
-    
-};
+            console.log('lat: ', lat);
+            console.log('lng: ', lng);
 
-App.propTypes = {
-    
-};
+            // fetch(`https://maps.googleapis.com/maps/api/place/details/output?key=AIzaSyAVFInxP4hbkJFbLz_L9XzRYUb3RaggzQc&placeid=${placeId}`, { mode: 'no-cors' }));
+        }
+    }
+
+    render() {
+        return (
+            <Router>
+                <Fragment>
+                    <Header isAuth={this.props.authenticated} user={this.props.user} />
+                    <Main>
+                        <Switch>
+                            <Authenticated exact path="/profile" component={Me} {...this.props} />
+                            <Authenticated 
+                                exact 
+                                path="/map" 
+                                component={MapPage} 
+                                {...this.props} 
+                                googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVFInxP4hbkJFbLz_L9XzRYUb3RaggzQc&v=3.exp&libraries=geometry,drawing,places"
+                                loadingElement={<div style={{ height: `100%` }} />}
+                                containerElement={<div style={{ height: `400px` }} />}
+                                mapElement={<div style={{ height: `100%` }} />}
+                                onPlacePick={this.onPlacePick}
+                            />
+
+                            <Route exact path="/login" render={(routerProps) => <Login {...this.props} {...routerProps} />} />
+
+                            <Route render={(routerProps) => <Home {...this.props} {...routerProps} />} />
+                        </Switch>
+                    </Main>
+                    <Footer>APP FOOTER</Footer>
+                </Fragment>
+            </Router>
+        );
+    }
+}
 
 export default withTracker(() => {
     const loggingIn = Meteor.loggingIn();
