@@ -16,10 +16,7 @@ import { Authenticated } from '/imports/ui/components'
 
 import styled from 'styled-components';
 
-
-const Header = styled.div`
-
-`;
+import { Header } from './components';
 
 const Main = styled.div`
     flex: 1;
@@ -32,7 +29,7 @@ const Footer = styled.div`
 const App = props => (
     <Router>
         <Fragment>
-            <Header>APP HEADER</Header>
+            <Header />
             <Main>
                 <Switch>
                     <Route exact name="index" path="/" component={Home} />
@@ -40,7 +37,7 @@ const App = props => (
                     <Authenticated exact path="/profile" component={Me} {...props} />
                     <Authenticated exact path="/map" component={MapPage} {...props} />
 
-                    <Route path="/login" component={Login} {...props} />
+                    <Route path="/login/:isNew" component={Login} {...props} />
 
                     <Route path="/" component={NotFound} />
                 </Switch>

@@ -9,9 +9,14 @@ const Div = styled.div`
 `;
 
 
-const Login = props => (
-    <Div> Login </Div>
+const Login = ({ location: { isNew }}) => (
+    isNew ? (
+        <Div> Sign-up </Div>
+    ) : (
+        <Div> Login </Div>
+    )
 );
+    
 
 Login.defaultProps = {
     
