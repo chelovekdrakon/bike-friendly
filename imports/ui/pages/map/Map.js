@@ -62,7 +62,11 @@ class Map extends PureComponent {
     }
 
     handleVote() {
-        console.log(this.state.place);
+        if (this.state.place) {
+            console.log(this.state.place);
+        } else {
+            console.log('choose the place');
+        }
     }
     
     render() {
