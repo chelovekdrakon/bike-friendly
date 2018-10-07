@@ -22,7 +22,7 @@ const Header = styled.div`
 `;
 
 const Main = styled.div`
-    flex: 1 0 auto;
+    flex: 1;
 `;
 
 const Footer = styled.div`
