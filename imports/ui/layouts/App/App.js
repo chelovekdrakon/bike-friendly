@@ -29,17 +29,15 @@ const Footer = styled.div`
 const App = props => (
     <Router>
         <Fragment>
-            <Header />
+            <Header isAuth={props.authenticated} user={props.user} />
             <Main>
                 <Switch>
-                    <Route exact name="index" path="/" component={Home} />
-
                     <Authenticated exact path="/profile" component={Me} {...props} />
                     <Authenticated exact path="/map" component={MapPage} {...props} />
 
-                    <Route path="/login/:isNew" component={Login} {...props} />
+                    <Route exact path="/login" render={(routerProps) => <Login {...props} {...routerProps} />} />
 
-                    <Route path="/" component={NotFound} />
+                    <Route render={(routerProps) => <Home {...props} {...routerProps} />} />
                 </Switch>
             </Main>
             <Footer>APP FOOTER</Footer>

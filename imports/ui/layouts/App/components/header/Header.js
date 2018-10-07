@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -39,7 +39,7 @@ const Col = styled.div`
     justify-content: ${props => props.justify || 'flex-start'};
 `;
 
-const Header = props => (
+const Header = ({ isAuth, user }) => (
     <Container>
         <Col align="center">
             <StyledLink to="/">
@@ -49,23 +49,31 @@ const Header = props => (
         <Col />
         <Col />
         <Col justify="flex-end"> 
-            <StyledLink 
-                to={{
-                    pathname: '/login/hello',
-                    isNew: false
-                }}
-            > 
-                Sign-in 
-            </StyledLink>  
-            / 
-             <StyledLink 
-                to={{
-                    pathname: '/login/hello',
-                    isNew: true
-                }}
-            > 
-                Sign-up 
-            </StyledLink>  
+            {
+                !isAuth ? (
+                    <Fragment>
+                        <StyledLink 
+                            to={{
+                                pathname: '/login',
+                                isNew: false
+                            }}
+                        > 
+                            Sign-in 
+                        </StyledLink>  
+                        / 
+                        <StyledLink 
+                            to={{
+                                pathname: '/login',
+                                isNew: true
+                            }}
+                        > 
+                            Sign-up 
+                        </StyledLink>
+                    </Fragment>  
+                ) : (
+                    <p> { user.username } </p>
+                )
+            }
         </Col>
     </Container>
 );
