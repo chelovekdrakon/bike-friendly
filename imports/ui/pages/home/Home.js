@@ -11,6 +11,7 @@ const Body = styled.div`
     align-items: center;
     flex: 1;
 `;
+
 const Header = styled.div``;
 const Main = styled.div``;
 const Footer = styled.div``;

@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
 import { BRAND_PRIMARY } from '../constants/colors';
+import { Logo } from './Logo';
 
 const StyledLink = styled(Link)`
     color: white;
@@ -15,12 +16,6 @@ const StyledLink = styled(Link)`
     &:visited {
         color: white;
     }
-`;
-
-const Logo = styled.img`
-    width: 6rem;
-    height: 6rem;
-    border-radius: 3rem;
 `;
 
 const Container = styled.div`
@@ -108,9 +103,7 @@ export class Header extends PureComponent {
 
         return (
             <Container>
-                <StyledLink to="/">
-                    <Logo src="https://via.placeholder.com/80x80" />
-                </StyledLink>
+                <Logo />
 
                 {this.renderNav(user)}
 

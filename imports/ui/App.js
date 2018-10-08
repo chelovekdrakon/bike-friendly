@@ -1,5 +1,6 @@
 import React, { Fragment, PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
@@ -8,15 +9,10 @@ import { Home, Me, MapPage, Login } from './pages';
 
 import { Authenticated } from './components/Authenticated';
 import { Header } from './components/Header';
-
-import styled from 'styled-components';
+import { Footer } from './components/Footer';
 
 const Main = styled.div`
     flex: 1;
-`;
-
-const Footer = styled.div`
-    flex-shrink: 0;
 `;
 
 class PureApp extends PureComponent {
@@ -43,7 +39,7 @@ class PureApp extends PureComponent {
                             <Route render={routerProps => <Home {...this.props} {...routerProps} />} />
                         </Switch>
                     </Main>
-                    <Footer>APP FOOTER</Footer>
+                    <Footer />
                 </Fragment>
             </Router>
         );
