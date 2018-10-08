@@ -3,6 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
+import { RichButton } from '../../components/RichButton';
 
 const Body = styled.div`
     display: flex;
@@ -16,7 +17,7 @@ const Section = styled.div`
     align-items: center;
     justify-content: center;
     padding: ${props => props.padding};
-    min-height: 880px;
+    height: 100vh;
     background-image: url('${props => props.background}');
     background-size: cover;
     background-position: 50% 50%;
@@ -24,6 +25,7 @@ const Section = styled.div`
 
     h1 {
         font-size: 10rem;
+        margin-top: 0;
     }
 
     p {
@@ -33,12 +35,19 @@ const Section = styled.div`
 
 const SectionContent = styled(Section)`
     max-width: 960px;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+`;
+
+const LoginButtonContainer = styled.div`
+    padding-top: 6rem;
 `;
 
 const Home = () => (
     <Body>
-        <Section padding={'20rem 2rem'} background="images/landing_back_1.png">
+        <Section padding={'20rem 1rem'} background="images/landing_back_1.png">
             <SectionContent>
                 <h1>SLOWBiCi</h1>
 
@@ -48,6 +57,10 @@ const Home = () => (
                     transporte, parkings y horas de gimnasio. Es la manera perfecta de mantenerse en forma aprovechando
                     los trayectos diarios. Todo esto convierte tu ciudad en un lugar menos contaminado y más habitable.
                 </p>
+
+                <LoginButtonContainer>
+                    <RichButton text="LOG IN" onClick={() => {}} />
+                </LoginButtonContainer>
             </SectionContent>
         </Section>
 
