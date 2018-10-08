@@ -16,6 +16,10 @@ export class Carousel extends React.PureComponent {
         this.startCarousel();
     }
 
+    componentWillUnmount() {
+        this.stopCarousel();
+    }
+
     startCarousel() {
         this.carouselIntervalId = setInterval(this.nextSlide, 5000);
     }
