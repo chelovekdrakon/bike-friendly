@@ -26,7 +26,7 @@ const LoginButtonContainer = styled.div`
     padding-top: 6rem;
 `;
 
-const Home = ({ history }) => (
+const Home = ({ history, user }) => (
     <Body>
         <Section padding={'20rem 1rem'} background="images/landing_back_1.png">
             <SectionContent>
@@ -39,14 +39,16 @@ const Home = ({ history }) => (
                     los trayectos diarios. Todo esto convierte tu ciudad en un lugar menos contaminado y más habitable.
                 </p>
 
-                <LoginButtonContainer>
-                    <RichButton
-                        text="LOG IN"
-                        onClick={() => {
-                            history.push('/login');
-                        }}
-                    />
-                </LoginButtonContainer>
+                {!user ? (
+                    <LoginButtonContainer>
+                        <RichButton
+                            text="LOG IN"
+                            onClick={() => {
+                                history.push('/login');
+                            }}
+                        />
+                    </LoginButtonContainer>
+                ) : null}
             </SectionContent>
         </Section>
 
