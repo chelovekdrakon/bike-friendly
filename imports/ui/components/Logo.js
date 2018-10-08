@@ -4,13 +4,11 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 const LogoImg = styled.img`
-    width: 6rem;
-    height: 6rem;
-    border-radius: 3rem;
+    width: ${props => props.width};
 `;
 
-export const Logo = () => (
+export const Logo = ({ size = 'small' }) => (
     <Link to="/">
-        <LogoImg src="https://via.placeholder.com/80x80" />
+        <LogoImg src={`images/logo_${size}.png`} width={size === 'large' ? '10.5rem' : '9.5rem'} />
     </Link>
 );

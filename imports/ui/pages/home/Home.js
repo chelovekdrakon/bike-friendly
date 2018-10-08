@@ -16,7 +16,7 @@ const Section = styled.div`
     align-items: center;
     justify-content: center;
     padding: ${props => props.padding};
-    min-height: 600px;
+    min-height: 880px;
     background-image: url('${props => props.background}');
     background-size: cover;
     background-position: 50% 50%;
@@ -50,6 +50,8 @@ const Home = () => (
                 </p>
             </SectionContent>
         </Section>
+
+        <Section background="images/landing_back_2.png" />
     </Body>
 );
 

@@ -53,7 +53,7 @@ export const Footer = () => (
         <FooterContent>
             <FooterContentItem>
                 <LogoContainer>
-                    <Logo />
+                    <Logo size="large" />
                 </LogoContainer>
             </FooterContentItem>
 

@@ -21,7 +21,7 @@ const StyledLink = styled(Link)`
 const Container = styled.div`
     display: flex;
     flex-direction: row;
-    padding: 2rem;
+    padding: 1rem 2rem;
     background-color: ${BRAND_PRIMARY};
     align-items: center;
     justify-content: space-between;
