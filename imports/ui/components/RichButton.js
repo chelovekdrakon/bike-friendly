@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const _RichButton = styled.div`
-    padding: 2.5rem 10rem;
+    padding: ${props => (props.small ? 1 : 2.5)}rem 10rem;
     text-transform: uppercase;
     font-size: 2.5rem;
     color: white;
@@ -23,4 +23,8 @@ const _RichButton = styled.div`
     }
 `;
 
-export const RichButton = ({ text, onClick }) => <_RichButton>{text}</_RichButton>;
+export const RichButton = ({ text, onClick, small }) => (
+    <_RichButton onClick={onClick} small={small}>
+        {text}
+    </_RichButton>
+);

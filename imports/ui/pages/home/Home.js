@@ -3,6 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
+import { Section } from '../../components/Section';
 import { RichButton } from '../../components/RichButton';
 import { Carousel } from '../../components/Carousel';
 import { CarouselItem } from '../../components/Carousel/CarouselItem';
@@ -11,28 +12,6 @@ const Body = styled.div`
     display: flex;
     flex-direction: column;
     flex: 1;
-`;
-
-const Section = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: ${props => props.padding};
-    height: 100vh;
-    background-image: url('${props => props.background}');
-    background-size: cover;
-    background-position: 50% 50%;
-    color: white;
-
-    h1 {
-        font-size: 10rem;
-        margin-top: 0;
-    }
-
-    p {
-        font-size: 2.5rem;
-    }
 `;
 
 const SectionContent = styled(Section)`
@@ -47,7 +26,7 @@ const LoginButtonContainer = styled.div`
     padding-top: 6rem;
 `;
 
-const Home = () => (
+const Home = ({ history }) => (
     <Body>
         <Section padding={'20rem 1rem'} background="images/landing_back_1.png">
             <SectionContent>
@@ -61,7 +40,12 @@ const Home = () => (
                 </p>
 
                 <LoginButtonContainer>
-                    <RichButton text="LOG IN" onClick={() => {}} />
+                    <RichButton
+                        text="LOG IN"
+                        onClick={() => {
+                            history.push('/login');
+                        }}
+                    />
                 </LoginButtonContainer>
             </SectionContent>
         </Section>
