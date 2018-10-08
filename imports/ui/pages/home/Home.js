@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
 import { RichButton } from '../../components/RichButton';
+import { Carousel } from '../../components/Carousel';
+import { CarouselItem } from '../../components/Carousel/CarouselItem';
 
 const Body = styled.div`
     display: flex;
@@ -65,6 +67,35 @@ const Home = () => (
         </Section>
 
         <Section background="images/landing_back_2.png" />
+
+        <Section>
+            <Carousel>
+                <CarouselItem
+                    imageUrl="images/carousel_img_1.png"
+                    title="PARECE UN SUEÑO PERO ES POSIBLE"
+                    text="Cientos de madrileños ya van en bici a trabajar:
+                    ahorrando dinero, sin contaminar,
+                    y ganando en salud
+                    "
+                />
+                <CarouselItem
+                    imageUrl="images/carousel_img_2.png"
+                    title="PARECE UN SUEÑO PERO ES POSIBLE"
+                    text="Cientos de madrileños ya van en bici a trabajar:
+                    ahorrando dinero, sin contaminar,
+                    y ganando en salud
+                    "
+                />
+                <CarouselItem
+                    imageUrl="images/carousel_img_3.png"
+                    title="PARECE UN SUEÑO PERO ES POSIBLE"
+                    text="Cientos de madrileños ya van en bici a trabajar:
+                    ahorrando dinero, sin contaminar,
+                    y ganando en salud
+                    "
+                />
+            </Carousel>
+        </Section>
     </Body>
 );
 
