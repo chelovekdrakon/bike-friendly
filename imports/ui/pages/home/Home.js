@@ -52,7 +52,7 @@ const Home = ({ history, user }) => (
             </SectionContent>
         </Section>
 
-        <Section background="images/landing_back_2.png" />
+        <Section background="images/landing_back_2.png" onClick={() => history.push('/map')} />
 
         <Section>
             <Carousel>

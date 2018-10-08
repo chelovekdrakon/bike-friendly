@@ -13,6 +13,8 @@ export const Section = styled.div`
     background-position: 50% 50%;
     color: white;
 
+    cursor: ${props => (props.onClick ? 'pointer' : 'default')};
+
     h1 {
         font-size: 10rem;
         margin-top: 0;
