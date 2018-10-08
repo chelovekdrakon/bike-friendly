@@ -1,34 +1,24 @@
 import React, { Fragment, PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 
-import {
-    Home,
-    Me,
-    MapPage,
-    Login
-} from '/imports/ui/pages';
+import { Home, Me, MapPage, Login } from './pages';
 
-import { Authenticated } from '/imports/ui/components'
-
-import styled from 'styled-components';
-
-import { Header } from './components';
+import { Authenticated } from './components/Authenticated';
+import { Header } from './components/Header';
+import { Footer } from './components/Footer';
 
 const Main = styled.div`
     flex: 1;
 `;
 
-const Footer = styled.div`
-    flex-shrink: 0;
-`;
-
-class App extends PureComponent {
+class PureApp extends PureComponent {
     constructor(props) {
         super(props);
-        this.state = {  };
+        this.state = {};
     }
 
     render() {
@@ -38,21 +28,25 @@ class App extends PureComponent {
                     <Header isAuth={this.props.authenticated} user={this.props.user} />
                     <Main>
                         <Switch>
-                            <Authenticated exact path="/profile" component={Me} {...this.props} />
-                            <Authenticated exact path="/map" component={MapPage} {...this.props} />
-                            <Route exact path="/login" render={(routerProps) => <Login {...this.props} {...routerProps} />} />
+                            <Authenticated exact path="/profile" Component={Me} {...this.props} />
+                            <Authenticated exact path="/map" Component={MapPage} {...this.props} />
+                            <Route
+                                exact
+                                path="/login"
+                                render={routerProps => <Login {...this.props} {...routerProps} />}
+                            />
 
-                            <Route render={(routerProps) => <Home {...this.props} {...routerProps} />} />
+                            <Route render={routerProps => <Home {...this.props} {...routerProps} />} />
                         </Switch>
                     </Main>
-                    <Footer>APP FOOTER</Footer>
+                    <Footer />
                 </Fragment>
             </Router>
         );
     }
 }
 
-export default withTracker(() => {
+const App = withTracker(() => {
     const loggingIn = Meteor.loggingIn();
     const user = Meteor.user();
     const userId = Meteor.userId();
@@ -70,6 +64,8 @@ export default withTracker(() => {
         authenticated,
         loading,
         name,
-        emailAddress
+        emailAddress,
     };
-})(App);
+})(PureApp);
+
+export { App };

@@ -8,17 +8,10 @@ const Div = styled.div`
     background-color: white;
 `;
 
+const Me = props => <Div> Me </Div>;
 
-const Me = props => (
-    <Div> Me </Div>
-);
+Me.defaultProps = {};
 
-Me.defaultProps = {
-    
-};
-
-Me.propTypes = {
-    
-};
+Me.propTypes = {};
 
 export default Me;
