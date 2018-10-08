@@ -1,23 +1,14 @@
 import React, { PureComponent } from 'react';
-import { withRouter } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
-import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
 
-const Container = styled.div`
-    display: flex;
-    flex-direction: column;
-    flex: 1 0 auto;
-    justify-content: center;
-    align-items: center;
-`;
+import { Section } from '../../components/Section';
+import { RichButton } from '../../components/RichButton';
 
 const Form = styled.div`
-    width: 30%;
-    border: 0.3rem solid green;
-    border-radius: 0.5rem;
+    width: 50%;
     padding: 1rem 2rem;
     display: flex;
     flex-direction: column;
@@ -28,63 +19,36 @@ const Form = styled.div`
     }
 `;
 
-const Input = styled.input`
-    border: 0.1rem solid green;
-    border-radius: 0.2rem;
-    margin: 0.3rem 0;
-    flex: 1 0 auto;
-`;
-
-const Button = styled.button`
-    border: 0.2rem solid black;
-    border-radius: 0.3rem;
-    margin: 1rem 0;
-    padding: 0.4rem 2rem;
-    font-size: 1.5rem;
-    min-width: 10%;
-
-    :focus {
-        outline: none;
-    }
-
-    :hover {
-        cursor: pointer;
-        color: red;
-        border-color: red;
-    }
-`;
-
 const InputWrapper = styled.div`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
     width: 100%;
+    padding-bottom: 1rem;
 `;
 
 const Label = styled.label`
-    color: black;
-    min-width: 30%;
-    disaplay: flex;
-    flex-direction: row;
+    color: white;
+    font-size: 2rem;
+    padding: 1rem;
+    text-align: left;
+    display: block;
+`;
+
+const Input = styled.input`
+    border: 0.2rem solid white;
+    border-radius: 0.5rem;
+    padding: 2.5rem;
+    font-size: 2rem;
+    background: transparent;
+    outline: none;
+    color: white;
+    width: 100%;
 `;
 
 class Login extends PureComponent {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            username: '',
-            password: '',
-            email: '',
-        };
-
-        this.handleUsernameChange = this.handleUsernameChange.bind(this);
-        this.handleEmailChange = this.handleEmailChange.bind(this);
-        this.handlePasswordChange = this.handlePasswordChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.registerUser = this.registerUser.bind(this);
-        this.loginUser = this.loginUser.bind(this);
-    }
+    state = {
+        username: '',
+        password: '',
+        email: '',
+    };
 
     componentDidMount() {
         const { history, userId } = this.props;
@@ -100,19 +64,19 @@ class Login extends PureComponent {
         }
     }
 
-    handleUsernameChange({ target: { value } }) {
+    handleUsernameChange = ({ target: { value } }) => {
         this.setState({ username: value });
-    }
+    };
 
-    handleEmailChange({ target: { value } }) {
+    handleEmailChange = ({ target: { value } }) => {
         this.setState({ email: value });
-    }
+    };
 
-    handlePasswordChange({ target: { value } }) {
+    handlePasswordChange = ({ target: { value } }) => {
         this.setState({ password: value });
-    }
+    };
 
-    handleSubmit(event) {
+    handleSubmit = event => {
         const {
             location: { isNew },
         } = this.props;
@@ -120,9 +84,9 @@ class Login extends PureComponent {
         isNew ? this.registerUser() : this.loginUser();
 
         event.preventDefault();
-    }
+    };
 
-    loginUser() {
+    loginUser = () => {
         const { username, password, history } = this.state;
 
         Meteor.loginWithPassword(username, password, err => {
@@ -132,9 +96,9 @@ class Login extends PureComponent {
                 console.log('success');
             }
         });
-    }
+    };
 
-    registerUser() {
+    registerUser = () => {
         const { history } = this.state;
 
         Accounts.createUser(this.state, err => {
@@ -144,7 +108,7 @@ class Login extends PureComponent {
                 console.log('success');
             }
         });
-    }
+    };
 
     render() {
         const {
@@ -154,25 +118,25 @@ class Login extends PureComponent {
         const { username, email, password } = this.state;
 
         return (
-            <Container>
+            <Section padding={'1rem'} background="images/landing_back_1.png">
                 <Form>
                     <InputWrapper>
-                        <Label>USERNAME : </Label>
+                        <Label>Username</Label>
                         <Input value={username} onChange={this.handleUsernameChange} />
                     </InputWrapper>
                     {isNew && (
                         <InputWrapper>
-                            <Label>EMAIL : </Label>
+                            <Label>Email</Label>
                             <Input value={email} onChange={this.handleEmailChange} />
                         </InputWrapper>
                     )}
                     <InputWrapper>
-                        <Label>PASSWORD : </Label>
+                        <Label>Password</Label>
                         <Input value={password} onChange={this.handlePasswordChange} type="password" />
                     </InputWrapper>
                 </Form>
-                <Button onClick={this.handleSubmit}> {isNew ? 'Sign-up' : 'Sign-in'} </Button>
-            </Container>
+                <RichButton small onClick={this.handleSubmit} text={isNew ? 'Sign up' : 'Log in'} />
+            </Section>
         );
     }
 }
