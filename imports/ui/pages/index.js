@@ -4,10 +4,4 @@ import { MapPage } from './map';
 import { Me } from './me';
 import { Profile } from './profile';
 
-export {
-    Home,
-    Login,
-    MapPage,
-    Me,
-    Profile
-};
+export { Home, Login, MapPage, Me, Profile };

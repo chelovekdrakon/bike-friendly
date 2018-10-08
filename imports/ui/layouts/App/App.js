@@ -4,14 +4,9 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 
-import {
-    Home,
-    Me,
-    MapPage,
-    Login
-} from '/imports/ui/pages';
+import { Home, Me, MapPage, Login } from '/imports/ui/pages';
 
-import { Authenticated } from '/imports/ui/components'
+import { Authenticated } from '/imports/ui/components';
 
 import styled from 'styled-components';
 
@@ -28,7 +23,7 @@ const Footer = styled.div`
 class App extends PureComponent {
     constructor(props) {
         super(props);
-        this.state = {  };
+        this.state = {};
     }
 
     render() {
@@ -40,9 +35,13 @@ class App extends PureComponent {
                         <Switch>
                             <Authenticated exact path="/profile" component={Me} {...this.props} />
                             <Authenticated exact path="/map" component={MapPage} {...this.props} />
-                            <Route exact path="/login" render={(routerProps) => <Login {...this.props} {...routerProps} />} />
+                            <Route
+                                exact
+                                path="/login"
+                                render={routerProps => <Login {...this.props} {...routerProps} />}
+                            />
 
-                            <Route render={(routerProps) => <Home {...this.props} {...routerProps} />} />
+                            <Route render={routerProps => <Home {...this.props} {...routerProps} />} />
                         </Switch>
                     </Main>
                     <Footer>APP FOOTER</Footer>
@@ -70,6 +69,6 @@ export default withTracker(() => {
         authenticated,
         loading,
         name,
-        emailAddress
+        emailAddress,
     };
 })(App);

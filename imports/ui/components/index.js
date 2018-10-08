@@ -1,5 +1,3 @@
-import { Authenticated } from './authenticated';
+import { Authenticated } from './Authenticated';
 
-export {
-    Authenticated
-};
+export { Authenticated };

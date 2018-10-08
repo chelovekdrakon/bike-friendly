@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
-import { Accounts } from 'meteor/accounts-base'
+import { Accounts } from 'meteor/accounts-base';
 import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
@@ -24,7 +24,7 @@ const Form = styled.div`
     align-items: flex-start;
 
     * {
-      font-size: 1.5rem; 
+        font-size: 1.5rem;
     }
 `;
 
@@ -71,28 +71,28 @@ const Label = styled.label`
 class Login extends PureComponent {
     constructor(props) {
         super(props);
-        
-        this.state = { 
+
+        this.state = {
             username: '',
             password: '',
-            email: ''
+            email: '',
         };
-        
+
         this.handleUsernameChange = this.handleUsernameChange.bind(this);
         this.handleEmailChange = this.handleEmailChange.bind(this);
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.registerUser = this.registerUser.bind(this);
-        this.loginUser = this.loginUser.bind(this)
+        this.loginUser = this.loginUser.bind(this);
     }
 
-    componentDidMount () {
+    componentDidMount() {
         const { history, userId } = this.props;
 
         userId && history.push('/');
     }
 
-    componentWillReceiveProps (nextProps) {
+    componentWillReceiveProps(nextProps) {
         const { userId, history } = this.props;
 
         if (nextProps.userId && nextProps.userId !== userId) {
@@ -100,36 +100,32 @@ class Login extends PureComponent {
         }
     }
 
-    handleUsernameChange({ target: { value }}) {
+    handleUsernameChange({ target: { value } }) {
         this.setState({ username: value });
     }
 
-    handleEmailChange({ target: { value }}) {
+    handleEmailChange({ target: { value } }) {
         this.setState({ email: value });
     }
 
-    handlePasswordChange({ target: { value }}) {
+    handlePasswordChange({ target: { value } }) {
         this.setState({ password: value });
     }
 
     handleSubmit(event) {
-        const { 
-            location: { isNew } 
+        const {
+            location: { isNew },
         } = this.props;
 
         isNew ? this.registerUser() : this.loginUser();
-        
+
         event.preventDefault();
     }
 
     loginUser() {
-        const {
-            username,
-            password,
-            history
-        } = this.state;
+        const { username, password, history } = this.state;
 
-        Meteor.loginWithPassword(username, password, (err) => {
+        Meteor.loginWithPassword(username, password, err => {
             if (err) {
                 console.log(err);
             } else {
@@ -139,11 +135,9 @@ class Login extends PureComponent {
     }
 
     registerUser() {
-        const {
-            history
-        } = this.state;
+        const { history } = this.state;
 
-        Accounts.createUser(this.state, (err) => {
+        Accounts.createUser(this.state, err => {
             if (err) {
                 console.log(err);
             } else {
@@ -153,15 +147,11 @@ class Login extends PureComponent {
     }
 
     render() {
-        const { 
-            location: { isNew } 
+        const {
+            location: { isNew },
         } = this.props;
 
-        const {
-            username,
-            email,
-            password
-        } = this.state;
+        const { username, email, password } = this.state;
 
         return (
             <Container>
@@ -170,14 +160,12 @@ class Login extends PureComponent {
                         <Label>USERNAME : </Label>
                         <Input value={username} onChange={this.handleUsernameChange} />
                     </InputWrapper>
-                    {
-                        isNew && (
-                            <InputWrapper>
-                                <Label>EMAIL : </Label>
-                                <Input value={email} onChange={this.handleEmailChange} />
-                            </InputWrapper>
-                        )
-                    }
+                    {isNew && (
+                        <InputWrapper>
+                            <Label>EMAIL : </Label>
+                            <Input value={email} onChange={this.handleEmailChange} />
+                        </InputWrapper>
+                    )}
                     <InputWrapper>
                         <Label>PASSWORD : </Label>
                         <Input value={password} onChange={this.handlePasswordChange} type="password" />
@@ -189,12 +177,8 @@ class Login extends PureComponent {
     }
 }
 
-Login.defaultProps = {
-    
-};
+Login.defaultProps = {};
 
-Login.propTypes = {
-    
-};
+Login.propTypes = {};
 
 export default Login;

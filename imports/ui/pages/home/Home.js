@@ -15,7 +15,6 @@ const Header = styled.div``;
 const Main = styled.div``;
 const Footer = styled.div``;
 
-
 const Home = props => (
     <Body>
         <Header>Hellw</Header>
@@ -24,12 +23,8 @@ const Home = props => (
     </Body>
 );
 
-Home.defaultProps = {
-    
-};
+Home.defaultProps = {};
 
-Home.propTypes = {
-    
-};
+Home.propTypes = {};
 
 export default Home;

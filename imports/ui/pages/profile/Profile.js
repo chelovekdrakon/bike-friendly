@@ -8,17 +8,10 @@ const Div = styled.div`
     background-color: white;
 `;
 
+const Profile = props => <Div> Profile </Div>;
 
-const Profile = props => (
-    <Div> Profile </Div>
-);
+Profile.defaultProps = {};
 
-Profile.defaultProps = {
-    
-};
-
-Profile.propTypes = {
-    
-};
+Profile.propTypes = {};
 
 export default Profile;

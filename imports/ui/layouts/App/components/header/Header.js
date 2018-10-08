@@ -68,14 +68,13 @@ const Button = styled.button`
 class Header extends PureComponent {
     constructor(props) {
         super(props);
-        this.state = {  };
+        this.state = {};
 
-        this.handleLogout = this.handleLogout.bind(this)
-        
+        this.handleLogout = this.handleLogout.bind(this);
     }
 
     handleLogout() {
-        Meteor.logout((err) => {
+        Meteor.logout(err => {
             if (err) {
                 console.log(err);
             } else {
@@ -83,67 +82,62 @@ class Header extends PureComponent {
             }
         });
     }
-    
+
     render() {
         const { isAuth, user } = this.props;
-        
+
         return (
             <Container>
                 <Col align="center">
                     <StyledLink to="/">
                         <Logo src="https://via.placeholder.com/80x80" />
-                    </StyledLink>  
+                    </StyledLink>
                 </Col>
                 <Col align="flex-end">
-                    {
-                        user && (
-                            <StyledLink underline="underline" to="/map"> Map </StyledLink>
-                        )
-                    }
+                    {user && (
+                        <StyledLink underline="underline" to="/map">
+                            {' '}
+                            Map{' '}
+                        </StyledLink>
+                    )}
                 </Col>
                 <Col />
                 <Col />
-                <Col justify="flex-end"> 
-                    {
-                        !isAuth ? (
-                            <Fragment>
-                                <StyledLink 
-                                    to={{
-                                        pathname: '/login',
-                                        isNew: false
-                                    }}
-                                > 
-                                    Sign-in 
-                                </StyledLink>  
-                                / 
-                                <StyledLink 
-                                    to={{
-                                        pathname: '/login',
-                                        isNew: true
-                                    }}
-                                > 
-                                    Sign-up 
-                                </StyledLink>
-                            </Fragment>  
-                        ) : (
-                            <UserMenu>
-                                <StyledLink to="/profile"> { user.username.toUpperCase() } </StyledLink>
-                                <Button onClick={this.handleLogout}> Logout </Button>
-                            </UserMenu>
-                        )
-                    }
+                <Col justify="flex-end">
+                    {!isAuth ? (
+                        <Fragment>
+                            <StyledLink
+                                to={{
+                                    pathname: '/login',
+                                    isNew: false,
+                                }}
+                            >
+                                Sign-in
+                            </StyledLink>
+                            /
+                            <StyledLink
+                                to={{
+                                    pathname: '/login',
+                                    isNew: true,
+                                }}
+                            >
+                                Sign-up
+                            </StyledLink>
+                        </Fragment>
+                    ) : (
+                        <UserMenu>
+                            <StyledLink to="/profile"> {user.username.toUpperCase()} </StyledLink>
+                            <Button onClick={this.handleLogout}> Logout </Button>
+                        </UserMenu>
+                    )}
                 </Col>
             </Container>
         );
     }
-};
+}
 
-Header.defaultProps = {
-    
-};
+Header.defaultProps = {};
 
-Header.propTypes = {
-    
-};
+Header.propTypes = {};
 
 export default Header;
