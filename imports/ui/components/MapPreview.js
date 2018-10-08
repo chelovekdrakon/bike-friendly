@@ -8,6 +8,7 @@ const Preview = styled.div`
     flex: 1;
     height: 100%;
     width: 100%;
+    cursor: pointer;
 `;
 
-export const MapPreview = ({ src }) => <Preview src={src} />;
+export const MapPreview = ({ src, onClick }) => <Preview src={src} onClick={onClick} />;

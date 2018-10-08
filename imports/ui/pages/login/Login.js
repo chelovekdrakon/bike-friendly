@@ -53,14 +53,16 @@ class Login extends PureComponent {
     componentDidMount() {
         const { history, userId } = this.props;
 
-        userId && history.push('/');
+        if (userId) {
+            history.push('/profile');
+        }
     }
 
     componentWillReceiveProps(nextProps) {
         const { userId, history } = this.props;
 
         if (nextProps.userId && nextProps.userId !== userId) {
-            history.push('/');
+            history.push('/profile');
         }
     }
 

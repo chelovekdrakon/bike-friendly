@@ -25,7 +25,7 @@ const Cell = styled.div`
     flex: ${props => props.weight || 1};
 `;
 
-const Profile = ({ user }) => (
+const Profile = ({ user, history }) => (
     <Section>
         {user ? (
             <Row>
@@ -34,7 +34,7 @@ const Profile = ({ user }) => (
                         <ProfilePic src="images/profile_pic.png" />
                     </Cell>
                     <Cell weight={4}>
-                        <MapPreview src="images/map_preview.png" />
+                        <MapPreview src="images/map_preview.png" onClick={() => history.push('/map')} />
                     </Cell>
                 </Col>
                 <Col>
