@@ -14,10 +14,11 @@ const Container = styled.a`
     color: ${BRAND_ACCENT};
     width: 38px;
     height: 38px;
+    text-decoration: none;
 `;
 
-export const SocialButton = ({ name }) => (
-    <Container>
+export const SocialLink = ({ name, href }) => (
+    <Container href={href}>
         <Icon name={name} />
     </Container>
 );

@@ -3,11 +3,11 @@ import styled from 'styled-components';
 
 import { BRAND_PRIMARY } from '../constants/colors';
 import { Logo } from './Logo';
-import { SocialButton } from './SocialButton';
+import { SocialLink } from './SocialLink';
 
 const Container = styled.div`
     color: white;
-    padding: 3rem;
+    padding: 15rem 3rem;
     background-color: ${BRAND_PRIMARY};
     display: flex;
     flex-direction: column;
@@ -15,15 +15,22 @@ const Container = styled.div`
 `;
 
 const FooterTitle = styled.h4`
-    text-decoration: underline;
     font-weight: normal;
+    font-size: 3.5rem;
+    text-transform: uppercase;
+    margin: 0;
+`;
+
+const FooterSubtitle = styled.h5`
+    font-size: 2.2rem;
+    margin: 0;
 `;
 
 const FooterContent = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 1rem;
+    padding: 11rem 0;
 `;
 
 const FooterContentItem = styled.div`
@@ -33,6 +40,14 @@ const FooterContentItem = styled.div`
 const Contacts = styled.div`
     text-align: center;
     width: 200px;
+
+    h6 {
+        text-decoration: underline;
+        font-size: 2rem;
+        margin-top: 0;
+        font-weight: normal;
+        margin-bottom: 2rem;
+    }
 
     p {
         margin: 0;
@@ -47,9 +62,16 @@ const SocialLinks = styled.div`
     display: flex;
 `;
 
+const Copyright = styled.div`
+    span {
+        margin: 0 1rem;
+    }
+`;
+
 export const Footer = () => (
     <Container>
-        <FooterTitle>About us</FooterTitle>
+        <FooterTitle>AL TEATRO, A CENAR, TUS COMPRAS… SIEMPRE EN BICI </FooterTitle>
+        <FooterSubtitle>(aparcamiento seguro, descuentos entre otras muchas ventajas)</FooterSubtitle>
         <FooterContent>
             <FooterContentItem>
                 <LogoContainer>
@@ -59,6 +81,7 @@ export const Footer = () => (
 
             <FooterContentItem>
                 <Contacts>
+                    <h6>About us</h6>
                     <p>Madrid</p>
                     <p>Costa Rica str.</p>
                     <p>21/4589</p>
@@ -68,11 +91,17 @@ export const Footer = () => (
 
             <FooterContentItem>
                 <SocialLinks>
-                    <SocialButton name="instagram" />
-                    <SocialButton name="facebook" />
-                    <SocialButton name="twitter" />
+                    <SocialLink name="instagram" href="about:blank" />
+                    <SocialLink name="facebook" href="about:blank" />
+                    <SocialLink name="twitter" href="about:blank" />
                 </SocialLinks>
             </FooterContentItem>
         </FooterContent>
+
+        <Copyright>
+            <span>Slow BiCi</span>
+            <span>©</span>
+            <span>All right reserved | 2018 </span>
+        </Copyright>
     </Container>
 );
