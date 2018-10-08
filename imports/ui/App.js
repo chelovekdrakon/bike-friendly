@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 
-import { Home, Me, MapPage, Login } from './pages';
+import { Home, MapPage, Login, Profile } from './pages';
 
 import { Authenticated } from './components/Authenticated';
 import { Header } from './components/Header';
@@ -28,7 +28,7 @@ class PureApp extends PureComponent {
                     <Header isAuth={this.props.authenticated} user={this.props.user} />
                     <Main>
                         <Switch>
-                            <Authenticated exact path="/profile" Component={Me} {...this.props} />
+                            <Authenticated exact path="/profile" Component={Profile} {...this.props} />
                             <Authenticated exact path="/map" Component={MapPage} {...this.props} />
                             <Route
                                 exact
@@ -36,7 +36,7 @@ class PureApp extends PureComponent {
                                 render={routerProps => <Login {...this.props} {...routerProps} />}
                             />
 
-                            <Route render={routerProps => <Home {...this.props} {...routerProps} />} />
+                            <Route exact path="/" render={routerProps => <Home {...this.props} {...routerProps} />} />
                         </Switch>
                     </Main>
                     <Footer />
