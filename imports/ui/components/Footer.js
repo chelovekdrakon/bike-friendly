@@ -61,7 +61,7 @@ export const Footer = () => (
                 <Contacts>
                     <p>Madrid</p>
                     <p>Costa Rica str.</p>
-                    <p>21 / 4589</p>
+                    <p>21/4589</p>
                     <p>+375 29 741 85 96</p>
                 </Contacts>
             </FooterContentItem>
