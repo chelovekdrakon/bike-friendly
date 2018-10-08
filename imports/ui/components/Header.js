@@ -65,7 +65,7 @@ const Button = styled.button`
     }
 `;
 
-class Header extends PureComponent {
+export class Header extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {};
@@ -139,5 +139,3 @@ class Header extends PureComponent {
 Header.defaultProps = {};
 
 Header.propTypes = {};
-
-export default Header;

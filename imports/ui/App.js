@@ -4,13 +4,12 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 
-import { Home, Me, MapPage, Login } from '/imports/ui/pages';
+import { Home, Me, MapPage, Login } from './pages';
 
-import { Authenticated } from '/imports/ui/components';
+import { Authenticated } from './components/Authenticated';
+import { Header } from './components/Header';
 
 import styled from 'styled-components';
-
-import { Header } from './components';
 
 const Main = styled.div`
     flex: 1;
@@ -20,7 +19,7 @@ const Footer = styled.div`
     flex-shrink: 0;
 `;
 
-class App extends PureComponent {
+class PureApp extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {};
@@ -33,8 +32,8 @@ class App extends PureComponent {
                     <Header isAuth={this.props.authenticated} user={this.props.user} />
                     <Main>
                         <Switch>
-                            <Authenticated exact path="/profile" component={Me} {...this.props} />
-                            <Authenticated exact path="/map" component={MapPage} {...this.props} />
+                            <Authenticated exact path="/profile" Component={Me} {...this.props} />
+                            <Authenticated exact path="/map" Component={MapPage} {...this.props} />
                             <Route
                                 exact
                                 path="/login"
@@ -51,7 +50,7 @@ class App extends PureComponent {
     }
 }
 
-export default withTracker(() => {
+const App = withTracker(() => {
     const loggingIn = Meteor.loggingIn();
     const user = Meteor.user();
     const userId = Meteor.userId();
@@ -71,4 +70,6 @@ export default withTracker(() => {
         name,
         emailAddress,
     };
-})(App);
+})(PureApp);
+
+export { App };
