@@ -4,20 +4,16 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
+import { BRAND_PRIMARY } from '../constants/colors';
 
 const StyledLink = styled(Link)`
-    color: palevioletred;
-    display: flex;
-    text-decoration: ${props => props.underline || 'none'};
-    color: green;
-    margin: 0 0.5rem;
+    color: white;
+    padding: 0 ${props => props.spacing || 1}rem;
+    text-transform: uppercase;
+    text-decoration: none;
 
-    &:hover {
-        text-decoration: none;
-    }
-
-    &.active {
-        color: green;
+    &:visited {
+        color: white;
     }
 `;
 
@@ -31,38 +27,21 @@ const Container = styled.div`
     display: flex;
     flex-direction: row;
     padding: 2rem;
-`;
-
-const Col = styled.div`
-    display: flex;
-    width: 25%;
-    align-items: ${props => props.align || 'flex-start'};
-    justify-content: ${props => props.justify || 'flex-start'};
-`;
-
-const UserMenu = styled.div`
-    display: flex;
-    flex-direction: column;
+    background-color: ${BRAND_PRIMARY};
     align-items: center;
+    justify-content: space-between;
+    color: white;
 `;
 
-const Button = styled.button`
-    border: 0.1rem solid black;
-    border-radius: 0.3rem;
-    margin: 1rem 0;
-    padding: 0.4rem 2rem;
-    font-size: 1.5rem;
-    min-width: 10%;
-
-    :focus {
-        outline: none;
-    }
-
-    :hover {
-        cursor: pointer;
-        color: red;
-        border-color: red;
-    }
+const LogoutButton = styled.button`
+    border: none;
+    color: white;
+    background-color: transparent;
+    font-size: 17px;
+    text-transform: uppercase;
+    outline: none;
+    padding: 1rem;
+    cursor: pointer;
 `;
 
 export class Header extends PureComponent {
@@ -83,54 +62,59 @@ export class Header extends PureComponent {
         });
     }
 
+    renderNav = user =>
+        user ? (
+            <div>
+                <StyledLink to="/map" spacing={4}>
+                    Map
+                </StyledLink>
+                <StyledLink to="/profile" spacing={4}>
+                    Profile
+                </StyledLink>
+            </div>
+        ) : null;
+
+    renderAuthMenu = () => (
+        <div>
+            <StyledLink
+                to={{
+                    pathname: '/login',
+                    isNew: false,
+                }}
+            >
+                Log in
+            </StyledLink>
+            <StyledLink
+                to={{
+                    pathname: '/login',
+                    isNew: true,
+                }}
+            >
+                Sign up
+            </StyledLink>
+        </div>
+    );
+
+    renderUserMenu = ({ username }) => (
+        <div>
+            <StyledLink to="/profile">{username}</StyledLink>
+            {'|'}
+            <LogoutButton onClick={this.handleLogout}>Log out</LogoutButton>
+        </div>
+    );
+
     render() {
         const { isAuth, user } = this.props;
 
         return (
             <Container>
-                <Col align="center">
-                    <StyledLink to="/">
-                        <Logo src="https://via.placeholder.com/80x80" />
-                    </StyledLink>
-                </Col>
-                <Col align="flex-end">
-                    {user && (
-                        <StyledLink underline="underline" to="/map">
-                            {' '}
-                            Map{' '}
-                        </StyledLink>
-                    )}
-                </Col>
-                <Col />
-                <Col />
-                <Col justify="flex-end">
-                    {!isAuth ? (
-                        <Fragment>
-                            <StyledLink
-                                to={{
-                                    pathname: '/login',
-                                    isNew: false,
-                                }}
-                            >
-                                Sign-in
-                            </StyledLink>
-                            /
-                            <StyledLink
-                                to={{
-                                    pathname: '/login',
-                                    isNew: true,
-                                }}
-                            >
-                                Sign-up
-                            </StyledLink>
-                        </Fragment>
-                    ) : (
-                        <UserMenu>
-                            <StyledLink to="/profile"> {user.username.toUpperCase()} </StyledLink>
-                            <Button onClick={this.handleLogout}> Logout </Button>
-                        </UserMenu>
-                    )}
-                </Col>
+                <StyledLink to="/">
+                    <Logo src="https://via.placeholder.com/80x80" />
+                </StyledLink>
+
+                {this.renderNav(user)}
+
+                {!isAuth ? this.renderAuthMenu() : this.renderUserMenu(user)}
             </Container>
         );
     }
