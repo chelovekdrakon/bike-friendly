@@ -4,6 +4,19 @@ import { GoogleMap } from "./google-map";
 
 import styled from "styled-components";
 
+const GOOGLE_KEY = '';
+
+const GOLOS_KEYS = {
+  constPermlik: "",
+  acc: "",
+  pass: "",
+  wif: "",
+  author: "",
+  parentPermlink: "",
+  permLink: "",
+  title: ""
+};
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -56,44 +69,32 @@ class Map extends PureComponent {
           placeId
         }
       });
-
-      // fetch(`https://maps.googleapis.com/maps/api/place/details/output?key=AIzaSyAVFInxP4hbkJFbLz_L9XzRYUb3RaggzQc&placeid=${placeId}`, { mode: 'no-cors' }));
     }
   }
 
   handleVote() {
-    const constPermlik = "test12345";
-      
-    const acc = "test3";
+    
       
     function sendRequest(status, data) {
         const context = {};
 
-        const pass = "qwerty12345",
-            wif = "5Hvp79CaQrYUD9d33VvdtWY5BhyimS4t5vMDCBJE1WsTUUPuu1F",
-            author = "test3",
-            parentPermlink = "let-me-live-let-me-breath",
-            permLink = "veloboys",
-            body = data,
-            title = "TITLE";
+        const body = data;
 
       if (status == "comment") {
-        context.parentAuthor = author;
-        context.parentPermlink = parentPermlink;
+        context.parentAuthor = GOLOS_KEYS.author;
         context.permlink = String(Math.floor(Math.random() * (10000 - 1 + 1)) + 1);
       } else {
         context.parentAuthor = "";
-        context.parentPermlink = parentPermlink;
-        context.permlink = permLink;
+        context.permlink = GOLOS_KEYS.permLink;
       }
 
       window.golos.broadcast.comment(
-        wif,
+        GOLOS_KEYS.wif,
         context.parentAuthor,
-        context.parentPermlink,
-        author,
+        GOLOS_KEYS.parentPermlink,
+        GOLOS_KEYS.author,
         context.permlink,
-        title,
+        GOLOS_KEYS.title,
         body,
         "",
         function(err, result) {
@@ -107,7 +108,7 @@ class Map extends PureComponent {
     if (this.state.place) {
         const place = { ...this.state.place };
 
-        window.golos.api.getContent(acc, constPermlik, function(err, result) {
+        window.golos.api.getContent(GOLOS_KEYS.acc, GOLOS_KEYS.constPermlik, function(err, result) {
           console.log(result);
           result.id == 0
             ? sendRequest("post", `place: ${place.placeId}, lng: ${place.lng}, lat: ${place.lat}`)
@@ -123,7 +124,7 @@ class Map extends PureComponent {
     return (
       <Container>
         <GoogleMap
-            googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVFInxP4hbkJFbLz_L9XzRYUb3RaggzQc&v=3.exp&libraries=geometry,drawing,places"
+            googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${GOOGLE_KEY}&v=3.exp&libraries=geometry,drawing,places`}
             loadingElement={<div style={{ height: `100%` }} />}
             containerElement={<div style={{ height: `400px` }} />}
             mapElement={<div style={{ height: `100%` }} />}
