@@ -3,6 +3,8 @@ import React, { PureComponent } from 'react';
 import { GoogleMap } from './google-map';
 
 import styled from 'styled-components';
+import { Section } from '../../components/Section';
+import { RatedPlacesList } from '../../components/RatedPlacesList';
 
 const GOOGLE_KEY = '';
 
@@ -39,6 +41,13 @@ const Button = styled.button`
         color: red;
         border-color: red;
     }
+`;
+
+const RatingContainer = styled.div`
+    display: flex;
+    padding: 15rem 0;
+    align-items: center;
+    justify-content: center;
 `;
 
 class Map extends PureComponent {
@@ -124,15 +133,52 @@ class Map extends PureComponent {
                 <GoogleMap
                     googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${GOOGLE_KEY}&v=3.exp&libraries=geometry,drawing,places`}
                     loadingElement={<div style={{ height: `100%` }} />}
-                    containerElement={<div style={{ height: `400px` }} />}
+                    containerElement={<div style={{ height: `90vh` }} />}
                     mapElement={<div style={{ height: `100%` }} />}
                     onPlacePick={this.onPlacePick}
                     {...this.props}
                 />
-                <Button onClick={this.handleVote}>VOTE</Button>
+                <RatingContainer>
+                    <RatedPlacesList places={this.props.ratedPlaces} />
+                </RatingContainer>
             </Container>
         );
     }
 }
+
+Map.defaultProps = {
+    ratedPlaces: [
+        {
+            id: 1,
+            title: 'Cafe Madrid Rio',
+            type: 'Restaurant',
+            rating: 5,
+        },
+        {
+            id: 2,
+            title: 'Starbucks',
+            type: 'Cafe',
+            rating: 4,
+        },
+        {
+            id: 3,
+            title: 'Farmacijia 1',
+            type: 'Farm',
+            rating: 3,
+        },
+        {
+            id: 4,
+            title: 'Principle Pio',
+            type: 'Shopping Mall',
+            rating: 5,
+        },
+        {
+            id: 5,
+            title: 'Cinema DD',
+            type: 'Cinema',
+            rating: 3,
+        },
+    ],
+};
 
 export default Map;
