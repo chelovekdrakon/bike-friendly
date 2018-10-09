@@ -42,7 +42,7 @@ const Home = ({ history, user }) => (
                 {!user ? (
                     <LoginButtonContainer>
                         <RichButton
-                            text="LOG IN"
+                            text="INICIAR"
                             onClick={() => {
                                 history.push('/login');
                             }}
