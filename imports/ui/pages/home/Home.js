@@ -63,7 +63,9 @@ const Home = ({ history, user }) => (
                     ahorrando dinero, sin contaminar,
                     y ganando en salud
                     "
-                />
+                >
+                    <RichButton text="Join" />
+                </CarouselItem>
                 <CarouselItem
                     imageUrl="images/carousel_img_2.png"
                     title="PARECE UN SUEÑO PERO ES POSIBLE"
@@ -71,7 +73,9 @@ const Home = ({ history, user }) => (
                     ahorrando dinero, sin contaminar,
                     y ganando en salud
                     "
-                />
+                >
+                    <RichButton text="Donate" />
+                </CarouselItem>
                 <CarouselItem
                     imageUrl="images/carousel_img_3.png"
                     title="PARECE UN SUEÑO PERO ES POSIBLE"
@@ -79,7 +83,9 @@ const Home = ({ history, user }) => (
                     ahorrando dinero, sin contaminar,
                     y ganando en salud
                     "
-                />
+                >
+                    <RichButton text="Shop" />
+                </CarouselItem>
             </Carousel>
         </Section>
     </Body>
