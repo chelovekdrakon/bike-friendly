@@ -59,31 +59,37 @@ class _GoogleMap extends React.PureComponent {
             center: nextCenter,
             markers: nextMarkers,
         });
+
+        this.props.onPlacesChanged(
+            places.map(({ id, name, types }) => ({
+                id,
+                title: name,
+                type: types[0],
+            }))
+        );
     };
 
     render() {
         return (
-            <div style={this.props.containerStyles}>
-                <GoogleMap ref={this.refMap} defaultZoom={13} defaultCenter={this.state.center}>
-                    <SearchBox
-                        ref={this.refSearchBox}
-                        bounds={this.map ? this.map.getBounds() : null}
-                        controlPosition={google.maps.ControlPosition.TOP_LEFT}
-                        onPlacesChanged={this.onPlacesChanged}
-                    >
-                        <SearchInput type="text" placeholder="Search for places" />
-                    </SearchBox>
-                    {this.state.markers.map((marker, index) => (
-                        <Marker
-                            key={index}
-                            position={{
-                                lat: marker.position.lat(),
-                                lng: marker.position.lng(),
-                            }}
-                        />
-                    ))}
-                </GoogleMap>
-            </div>
+            <GoogleMap ref={this.refMap} defaultZoom={13} defaultCenter={this.state.center}>
+                <SearchBox
+                    ref={this.refSearchBox}
+                    bounds={this.map ? this.map.getBounds() : null}
+                    controlPosition={google.maps.ControlPosition.TOP_LEFT}
+                    onPlacesChanged={this.onPlacesChanged}
+                >
+                    <SearchInput type="text" placeholder="Search for places" />
+                </SearchBox>
+                {this.state.markers.map((marker, index) => (
+                    <Marker
+                        key={index}
+                        position={{
+                            lat: marker.position.lat(),
+                            lng: marker.position.lng(),
+                        }}
+                    />
+                ))}
+            </GoogleMap>
         );
     }
 }

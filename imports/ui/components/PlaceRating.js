@@ -21,6 +21,14 @@ const PlaceDescription = styled.div`
     }
 
     span:first-child {
+        display: inline-block;
+        width: 35rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    span:first-child {
         font-weight: bold;
     }
 `;
