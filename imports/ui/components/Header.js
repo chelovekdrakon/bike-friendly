@@ -61,10 +61,10 @@ export class Header extends PureComponent {
         user ? (
             <div>
                 <StyledLink to="/map" spacing={4}>
-                    Map
+                    Mapa
                 </StyledLink>
                 <StyledLink to="/profile" spacing={4}>
-                    Profile
+                    Perfil
                 </StyledLink>
             </div>
         ) : null;
@@ -77,7 +77,7 @@ export class Header extends PureComponent {
                     isNew: false,
                 }}
             >
-                Log in
+                INICIAR
             </StyledLink>
             <StyledLink
                 to={{
@@ -85,7 +85,7 @@ export class Header extends PureComponent {
                     isNew: true,
                 }}
             >
-                Sign up
+                INSCRIBIR
             </StyledLink>
         </div>
     );
@@ -94,7 +94,7 @@ export class Header extends PureComponent {
         <div>
             <StyledLink to="/profile">{username}</StyledLink>
             {'|'}
-            <LogoutButton onClick={this.handleLogout}>Log out</LogoutButton>
+            <LogoutButton onClick={this.handleLogout}>CERRAR</LogoutButton>
         </div>
     );
 

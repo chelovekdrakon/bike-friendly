@@ -30,25 +30,25 @@ export const ProfileInfo = ({ username, distance, favoritePlace, visitedPlace })
     <Container>
         <InfoRow>
             <div>
-                <span>User name:</span> <span>{username}</span>
+                <span>Nombre de usuario:</span> <span>{username}</span>
             </div>
         </InfoRow>
 
         <InfoRow>
             <div>
-                <span>Kilometers:</span> <span>{distance}</span>
+                <span>Kilómetros rodados:</span> <span>{distance}</span>
             </div>
         </InfoRow>
 
         <InfoRow>
             <div>
-                <span>Favrotie place:</span> <span>{favoritePlace}</span>
+                <span>Mis lugares favoritos:</span> <span>{favoritePlace}</span>
             </div>
         </InfoRow>
 
         <InfoRow>
             <div>
-                <span>Visited place:</span> <span>{visitedPlace}</span>
+                <span>Lugares visitados:</span> <span>{visitedPlace}</span>
             </div>
         </InfoRow>
     </Container>

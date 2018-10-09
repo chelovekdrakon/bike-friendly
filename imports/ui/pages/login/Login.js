@@ -137,7 +137,7 @@ class Login extends PureComponent {
                         <Input value={password} onChange={this.handlePasswordChange} type="password" />
                     </InputWrapper>
                 </Form>
-                <RichButton small onClick={this.handleSubmit} text={isNew ? 'Sign up' : 'Log in'} />
+                <RichButton small onClick={this.handleSubmit} text={isNew ? 'INSCRIBIR' : 'INICIAR'} />
             </Section>
         );
     }

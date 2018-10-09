@@ -25,7 +25,7 @@ export const RatedPlacesList = ({ places, onPlaceRateClick = () => {} }) => (
             <Row key={place.id}>
                 <PlaceRating title={place.title} type={place.type} rating={place.rating} />
 
-                <RichButton text="Vote" theme="light" onClick={() => onPlaceRateClick(place.id)} />
+                <RichButton text="Voto" theme="light" onClick={() => onPlaceRateClick(place.id)} />
             </Row>
         ))}
     </Container>
