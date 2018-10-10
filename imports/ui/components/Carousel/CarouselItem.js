@@ -35,14 +35,31 @@ const Overlay = styled.div`
     right: 0;
     bottom: 0;
     transition: opacity 0.5s;
+    z-index: 2;
 `;
 
-export const CarouselItem = ({ imageUrl, isActive, title, text }) => (
+const ContentContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 4rem;
+    padding: 2rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 3;
+`;
+
+export const CarouselItem = ({ imageUrl, isActive, title, text, children }) => (
     <Container background={imageUrl}>
         <TextContainer opacity={isActive ? 1 : 0}>
             <h3>{title}</h3>
             <p>{text}</p>
         </TextContainer>
+
+        <ContentContainer>{children}</ContentContainer>
 
         <Overlay show={!isActive} />
     </Container>

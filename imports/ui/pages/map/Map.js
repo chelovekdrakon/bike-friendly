@@ -6,6 +6,10 @@ import styled from 'styled-components';
 import { Section } from '../../components/Section';
 import { RatedPlacesList } from '../../components/RatedPlacesList';
 
+function getRandomArbitrary(min, max) {
+    return Math.random() * (max - min) + min;
+}
+
 const GOOGLE_KEY = '';
 
 const GOLOS_KEYS = {
@@ -51,17 +55,42 @@ const RatingContainer = styled.div`
 `;
 
 class Map extends PureComponent {
-    constructor(props) {
-        super(props);
-        this.state = {
-            place: null,
-        };
+    state = {
+        places: [
+            {
+                id: 1,
+                title: 'Cafe Madrid Rio',
+                type: 'Restaurant',
+                rating: 5,
+            },
+            {
+                id: 2,
+                title: 'Starbucks',
+                type: 'Cafe',
+                rating: 4,
+            },
+            {
+                id: 3,
+                title: 'Farmacijia 1',
+                type: 'Farm',
+                rating: 3,
+            },
+            {
+                id: 4,
+                title: 'Principle Pio',
+                type: 'Shopping Mall',
+                rating: 5,
+            },
+            {
+                id: 5,
+                title: 'Cinema DD',
+                type: 'Cinema',
+                rating: 3,
+            },
+        ],
+    };
 
-        this.onPlacePick = this.onPlacePick.bind(this);
-        this.handleVote = this.handleVote.bind(this);
-    }
-
-    onPlacePick({ placeId, latLng }) {
+    onPlacePick = ({ placeId, latLng }) => {
         if (placeId) {
             console.log('place id: ', placeId);
 
@@ -79,9 +108,9 @@ class Map extends PureComponent {
                 },
             });
         }
-    }
+    };
 
-    handleVote() {
+    handleVote = () => {
         function sendRequest(status, data) {
             const context = {};
 
@@ -125,7 +154,15 @@ class Map extends PureComponent {
         } else {
             console.log('choose the place');
         }
-    }
+    };
+
+    onPlacesChanged = places => {
+        this.setState({
+            places: places.map(place => {
+                return { ...place, rating: Math.random() * getRandomArbitrary(3, 6) };
+            }),
+        });
+    };
 
     render() {
         return (
@@ -137,48 +174,16 @@ class Map extends PureComponent {
                     mapElement={<div style={{ height: `100%` }} />}
                     onPlacePick={this.onPlacePick}
                     {...this.props}
+                    onPlacesChanged={this.onPlacesChanged}
                 />
                 <RatingContainer>
-                    <RatedPlacesList places={this.props.ratedPlaces} />
+                    <RatedPlacesList places={this.state.places} />
                 </RatingContainer>
             </Container>
         );
     }
 }
 
-Map.defaultProps = {
-    ratedPlaces: [
-        {
-            id: 1,
-            title: 'Cafe Madrid Rio',
-            type: 'Restaurant',
-            rating: 5,
-        },
-        {
-            id: 2,
-            title: 'Starbucks',
-            type: 'Cafe',
-            rating: 4,
-        },
-        {
-            id: 3,
-            title: 'Farmacijia 1',
-            type: 'Farm',
-            rating: 3,
-        },
-        {
-            id: 4,
-            title: 'Principle Pio',
-            type: 'Shopping Mall',
-            rating: 5,
-        },
-        {
-            id: 5,
-            title: 'Cinema DD',
-            type: 'Cinema',
-            rating: 3,
-        },
-    ],
-};
+Map.defaultProps = {};
 
 export default Map;
