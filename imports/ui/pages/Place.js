@@ -99,12 +99,12 @@ export const PlacePage = page(() => (
                 <InfoRow>
                     <WithIcon icon="mobile">+375 29 452 59 63</WithIcon>
                 </InfoRow>
-                <SocialLink name="facebook-official" link="https://facebook.com" />
 
-                <SocialLink name="twitter" link="https://facebook.com" />
-
-                <SocialLink name="instagram" link="https://facebook.com" />
-                <InfoRow />
+                <InfoRow>
+                    <SocialLink name="facebook-official" link="https://facebook.com" />
+                    <SocialLink name="twitter" link="https://facebook.com" />
+                    <SocialLink name="instagram" link="https://facebook.com" />
+                </InfoRow>
             </PlaceInfoContainer>
         </PlaceInfoSection>
     </Container>
