@@ -11,35 +11,36 @@ const Container = styled.div`
 `;
 
 const PlaceDescription = styled.div`
-    width: 60rem;
     font-size: 3.5rem;
-    text-align: center;
-    padding: 4.5rem 0;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    ${props => (props.descriptionWidth ? `width: ${props.descriptionWidth}rem` : '')};
 
     span {
-        padding: 0 3rem;
-    }
-
-    span:first-child {
+        padding-right: 3rem;
         display: inline-block;
-        width: 35rem;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
     }
 
     span:first-child {
         font-weight: bold;
     }
+
+    span:last-child {
+        padding-left: 3rem;
+    }
 `;
 
 const RatingStarsContainer = styled.div`
     display: flex;
+    white-space: nowrap;
 `;
 
-export const PlaceRating = ({ title, type, rating }) => (
+export const PlaceRating = ({ title, type, rating, descriptionWidth }) => (
     <Container>
-        <PlaceDescription>
+        <PlaceDescription descriptionWidth={descriptionWidth}>
             <span>{title}</span>
             {'|'}
             <span>{type}</span>

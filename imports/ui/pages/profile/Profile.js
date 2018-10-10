@@ -2,17 +2,18 @@ import React from 'react';
 
 import styled from 'styled-components';
 import { Section } from '../../components/Section';
-import { ProfilePic } from '../../components/ProfilePicture';
 import { MapPreview } from '../../components/MapPreview';
 import { ProfileInfo } from '../../components/ProfileInfo';
 import { ProfileGallerySlider } from '../../components/ProfileGallerySlider';
 import { ProfileGalleryPicture } from '../../components/ProfileGallerySlider/ProfileGalleryPicture';
+import { ImageCover } from '../../components/ImageConver';
 
 const Row = styled.div`
     height: 100%;
     display: flex;
     flex-direction: row;
     align-self: stretch;
+    font-size: 1.6rem;
 `;
 
 const Col = styled.div`
@@ -31,7 +32,7 @@ const Profile = ({ user, history }) => (
             <Row>
                 <Col>
                     <Cell weight={5}>
-                        <ProfilePic src="images/profile_pic.png" />
+                        <ImageCover src="images/profile_pic.png" />
                     </Cell>
                     <Cell weight={4}>
                         <MapPreview src="images/map_preview.png" onClick={() => history.push('/map')} />

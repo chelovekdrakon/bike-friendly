@@ -10,6 +10,7 @@ import { Home, MapPage, Login, Profile } from './pages';
 import { Authenticated } from './components/Authenticated';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
+import { PlacePage } from './pages/Place';
 
 const Main = styled.div`
     flex: 1;
@@ -30,6 +31,7 @@ class PureApp extends PureComponent {
                         <Switch>
                             <Authenticated exact path="/profile" Component={Profile} {...this.props} />
                             <Authenticated exact path="/map" Component={MapPage} {...this.props} />
+                            <Authenticated exact path="/place" Component={PlacePage} {...this.props} />
                             <Route
                                 exact
                                 path="/login"
