@@ -6,6 +6,7 @@ import styled from 'styled-components';
 
 import { Section } from '../../components/Section';
 import { RichButton } from '../../components/RichButton';
+import { page } from '../../hocs/page';
 
 const Form = styled.div`
     width: 50%;
@@ -147,4 +148,4 @@ Login.defaultProps = {};
 
 Login.propTypes = {};
 
-export default Login;
+export default page(Login);
