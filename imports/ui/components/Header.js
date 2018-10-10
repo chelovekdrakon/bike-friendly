@@ -26,6 +26,7 @@ const Container = styled.div`
     align-items: center;
     justify-content: space-between;
     color: white;
+    font-size: 1.8rem;
 `;
 
 const LogoutButton = styled.button`
