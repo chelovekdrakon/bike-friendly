@@ -6,6 +6,7 @@ import { ImageCover } from '../components/ImageConver';
 import { PlaceRating } from '../components/PlaceRating';
 import { WithIcon } from '../components/WithIcon';
 import { BRAND_PRIMARY } from '../constants/colors';
+import { page } from '../hocs/page';
 
 const Container = styled.div`
     display: flex;
@@ -68,7 +69,7 @@ const SocialLink = ({ name, link }) => (
     </SocialLinkContainer>
 );
 
-export const PlacePage = () => (
+export const PlacePage = page(() => (
     <Container>
         <PlacePicturesSection>
             <ImageCover src="images/place_pic_1.png" />
@@ -107,4 +108,4 @@ export const PlacePage = () => (
             </PlaceInfoContainer>
         </PlaceInfoSection>
     </Container>
-);
+));

@@ -11,17 +11,20 @@ const Container = styled.div`
 `;
 
 const PlaceDescription = styled.div`
-    font-size: 3.5rem;
+    font-size: 2.5rem;
     display: flex;
     align-items: center;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    ${props => (props.descriptionWidth ? `width: ${props.descriptionWidth}rem` : '')};
+    ${props => (props.descriptionWidth ? `width: ${props.descriptionWidth}` : '')};
 
     span {
         padding-right: 3rem;
         display: inline-block;
+        max-width: 70%;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     span:first-child {

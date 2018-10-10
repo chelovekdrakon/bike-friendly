@@ -7,6 +7,7 @@ import { ProfileInfo } from '../../components/ProfileInfo';
 import { ProfileGallerySlider } from '../../components/ProfileGallerySlider';
 import { ProfileGalleryPicture } from '../../components/ProfileGallerySlider/ProfileGalleryPicture';
 import { ImageCover } from '../../components/ImageConver';
+import { page } from '../../hocs/page';
 
 const Row = styled.div`
     height: 100%;
@@ -70,4 +71,4 @@ Profile.defaultProps = {};
 
 Profile.propTypes = {};
 
-export default Profile;
+export default page(Profile);

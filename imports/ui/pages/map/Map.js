@@ -1,16 +1,22 @@
 import React, { PureComponent } from 'react';
 
-import { GoogleMap } from './google-map';
-
 import styled from 'styled-components';
-import { Section } from '../../components/Section';
+import Select from 'react-select';
+
+import { GoogleMap } from './google-map';
 import { RatedPlacesList } from '../../components/RatedPlacesList';
+import { BRAND_PRIMARY } from '../../constants/colors';
+import { RichButton } from '../../components/RichButton';
+import { page } from '../../hocs/page';
+import { Modal } from '../../components/Modal';
+import { PlaceForm } from '../../components/PlaceForm';
 
 function getRandomArbitrary(min, max) {
     return Math.random() * (max - min) + min;
 }
 
-const GOOGLE_KEY = '';
+const GOOGLE_KEY = 'AIzaSyBIb_i0XALoy1-IDikhnFWjNE-nk1Gznzk';
+// const GOOGLE_KEY = '';
 
 const GOLOS_KEYS = {
     constPermlik: '',
@@ -26,31 +32,51 @@ const GOLOS_KEYS = {
 const Container = styled.div`
     display: flex;
     flex-direction: column;
+    align-items: center;
 `;
 
-const Button = styled.button`
-    border: 0.2rem solid black;
-    border-radius: 0.3rem;
-    margin: 1rem 0;
-    padding: 0.4rem 2rem;
-    font-size: 1.5rem;
-    min-width: 10%;
-
-    :focus {
-        outline: none;
-    }
-
-    :hover {
-        cursor: pointer;
-        color: red;
-        border-color: red;
-    }
+const GoogleMapContainer = styled.div`
+    height: 90vh;
+    width: 100%;
 `;
 
 const RatingContainer = styled.div`
     display: flex;
-    padding: 15rem 0;
-    align-items: center;
+    flex-direction: column;
+    padding-bottom: 15rem;
+    align-items: stretch;
+    justify-content: center;
+    max-width: 70%;
+`;
+
+const Filters = styled.div`
+    display: flex;
+    padding: 13rem 0;
+
+    div {
+        margin-right: 3.3rem;
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+`;
+
+const Filter = styled.div`
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+
+    label {
+        font-size: 2rem;
+        color: #ececec;
+        margin-bottom: 0.7rem;
+    }
+`;
+
+const ControlsContainer = styled.div`
+    padding-top: 13rem;
+    display: flex;
     justify-content: center;
 `;
 
@@ -59,35 +85,98 @@ class Map extends PureComponent {
         places: [
             {
                 id: 1,
-                title: 'Cafe Madrid Rio',
-                type: 'Restaurant',
+                title: 'A Cafe Madrid Rio',
+                type: 'Shopping Mall',
                 rating: 5,
             },
             {
                 id: 2,
-                title: 'Starbucks',
-                type: 'Cafe',
+                title: 'A Starbucks',
+                type: 'Shopping Mall',
                 rating: 4,
             },
             {
                 id: 3,
-                title: 'Farmacijia 1',
-                type: 'Farm',
+                title: 'A Farmacijia 1',
+                type: 'Shopping Mall',
                 rating: 3,
             },
             {
                 id: 4,
-                title: 'Principle Pio',
+                title: 'A Principle Pio',
                 type: 'Shopping Mall',
                 rating: 5,
             },
             {
                 id: 5,
-                title: 'Cinema DD',
-                type: 'Cinema',
+                title: 'A Cinema DD',
+                type: 'Shopping Mall',
                 rating: 3,
             },
         ],
+
+        categories: [
+            {
+                label: 'Shopping mall',
+                value: 'shopping_mall',
+            },
+            {
+                label: 'Cafe',
+                value: 'cafe',
+            },
+            {
+                label: 'Cinema',
+                value: 'cinema',
+            },
+        ],
+
+        letters: Array.from({ length: 25 }).map((_, index) => ({
+            label: String.fromCharCode(index + 65),
+            value: String.fromCharCode(index + 65),
+        })),
+
+        ratings: Array.from({ length: 5 }).map((_, index) => ({
+            label: '★'.repeat(5 - index),
+            value: 5 - index,
+        })),
+
+        selectedCategory: null,
+        selectedLetter: null,
+        selectedRating: null,
+    };
+
+    componentDidMount() {
+        this.setState({
+            selectedCategory: this.state.categories[0],
+            selectedLetter: this.state.letters[0],
+            selectedRating: this.state.ratings[0],
+        });
+    }
+
+    selectStyles = {
+        control: (base, state) => {
+            let borderColor = base.borderColor;
+
+            if (state.isFocused) {
+                borderColor = BRAND_PRIMARY;
+            }
+
+            return { ...base, borderColor, boxShadow: 'none', fontSize: '2.5rem', ':hover': { borderColor } };
+        },
+
+        option: (base, state) => {
+            console.log(base, state);
+
+            const override = {
+                backgroundColor: BRAND_PRIMARY,
+                color: 'white',
+            };
+
+            if (state.isFocused || state.isSelected) {
+                return { ...base, ...override };
+            }
+            return { ...base, ':active': { ...override }, ':hover': { ...override } };
+        },
     };
 
     onPlacePick = ({ placeId, latLng }) => {
@@ -164,21 +253,82 @@ class Map extends PureComponent {
         });
     };
 
+    handleCategoryChange = selectedCategory => {
+        this.setState({ selectedCategory });
+    };
+
+    handleLetterChange = selectedLetter => {
+        this.setState({ selectedLetter });
+    };
+
+    handleRatingChange = selectedRating => {
+        this.setState({ selectedRating });
+    };
+
+    refModal = node => {
+        this.modal = node;
+    };
+
+    openModal = () => {
+        this.modal.open();
+    };
+
     render() {
         return (
             <Container>
-                <GoogleMap
-                    googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${GOOGLE_KEY}&v=3.exp&libraries=geometry,drawing,places`}
-                    loadingElement={<div style={{ height: `100%` }} />}
-                    containerElement={<div style={{ height: `90vh` }} />}
-                    mapElement={<div style={{ height: `100%` }} />}
-                    onPlacePick={this.onPlacePick}
-                    {...this.props}
-                    onPlacesChanged={this.onPlacesChanged}
-                />
+                <GoogleMapContainer>
+                    <GoogleMap
+                        googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${GOOGLE_KEY}&v=3.exp&libraries=geometry,drawing,places`}
+                        loadingElement={<div style={{ height: `100%` }} />}
+                        containerElement={<div style={{ height: `100%` }} />}
+                        mapElement={<div style={{ height: `100%` }} />}
+                        onPlacePick={this.onPlacePick}
+                        {...this.props}
+                        onPlacesChanged={this.onPlacesChanged}
+                    />
+                </GoogleMapContainer>
                 <RatingContainer>
+                    <Filters>
+                        <Filter>
+                            <label>Category</label>
+                            <Select
+                                value={this.state.selectedCategory}
+                                onChange={this.handleCategoryChange}
+                                options={this.state.categories}
+                                styles={this.selectStyles}
+                            />
+                        </Filter>
+
+                        <Filter>
+                            <label>A-z</label>
+                            <Select
+                                value={this.state.selectedLetter}
+                                onChange={this.handleLetterChange}
+                                options={this.state.letters}
+                                styles={this.selectStyles}
+                            />
+                        </Filter>
+
+                        <Filter>
+                            <label>Rating</label>
+                            <Select
+                                value={this.state.selectedRating}
+                                onChange={this.handleRatingChange}
+                                options={this.state.ratings}
+                                styles={this.selectStyles}
+                            />
+                        </Filter>
+                    </Filters>
                     <RatedPlacesList places={this.state.places} />
+
+                    <ControlsContainer>
+                        <RichButton text="Add" small onClick={this.openModal} theme="light" />
+                    </ControlsContainer>
                 </RatingContainer>
+
+                <Modal ref={this.refModal}>
+                    <PlaceForm onSubmit={() => this.modal.close()} />
+                </Modal>
             </Container>
         );
     }
@@ -186,4 +336,4 @@ class Map extends PureComponent {
 
 Map.defaultProps = {};
 
-export default Map;
+export default page(Map);

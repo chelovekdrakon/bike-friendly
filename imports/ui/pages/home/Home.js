@@ -7,6 +7,7 @@ import { Section } from '../../components/Section';
 import { RichButton } from '../../components/RichButton';
 import { Carousel } from '../../components/Carousel';
 import { CarouselItem } from '../../components/Carousel/CarouselItem';
+import { page } from '../../hocs/page';
 
 const Body = styled.div`
     display: flex;
@@ -26,7 +27,7 @@ const LoginButtonContainer = styled.div`
     padding-top: 6rem;
 `;
 
-const Home = ({ history, user }) => (
+const Home = page(({ history, user }) => (
     <Body>
         <Section padding={'20rem 1rem'} background="images/landing_back_1.png">
             <SectionContent>
@@ -89,7 +90,7 @@ const Home = ({ history, user }) => (
             </Carousel>
         </Section>
     </Body>
-);
+));
 
 Home.defaultProps = {};
 
