@@ -26,6 +26,11 @@ const Viewport = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+
+    @media (max-width: 700px) {
+        max-height: 100%;
+        border-radius: 0;
+    }
 `;
 
 export class Modal extends React.Component {
@@ -38,7 +43,7 @@ export class Modal extends React.Component {
             <ModalContainer opened={this.state.opened}>
                 <Viewport>{this.state.opened ? this.props.children : null}</Viewport>
             </ModalContainer>,
-            document.querySelector('#react-root')
+            document.querySelector('#modal-root')
         );
     }
 

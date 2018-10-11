@@ -4,7 +4,9 @@ import { CarouselArrow } from './CarouselArrow';
 
 const Container = styled.div`
     height: 100%;
+    width: 100%;
     display: flex;
+    position: relative;
 `;
 
 export class Carousel extends React.PureComponent {

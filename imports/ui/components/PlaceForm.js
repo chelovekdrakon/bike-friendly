@@ -40,6 +40,10 @@ const Footer = styled.div`
     align-items: center;
     justify-content: center;
     width: 100%;
+
+    @media (max-width: 700px) {
+        padding-bottom: 2rem;
+    }
 `;
 
 export class PlaceForm extends React.PureComponent {

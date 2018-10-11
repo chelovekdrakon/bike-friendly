@@ -20,17 +20,32 @@ const PlacePicturesSection = styled.div`
     div {
         flex: 1;
     }
+
+    @media (max-width: 700px) {
+        flex-direction: column;
+        height: 70vh;
+    }
 `;
 
 const PlaceInfoSection = styled.div`
-    padding: 13vh;
+    padding: 13rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    @media (max-width: 700px) {
+        padding: 2rem;
+    }
 `;
 
 const PlaceInfoContainer = styled.div`
     max-width: 70rem;
+    display: flex;
+    flex-wrap: wrap;
+
+    @media (max-width: 700px) {
+        max-width: 100%;
+    }
 `;
 
 const InfoRow = styled.div`
@@ -47,6 +62,8 @@ const InfoRow = styled.div`
     div {
         margin-right: 3.5rem;
     }
+
+    ${props => (props.singleLine ? `flex-basis: 100%` : '')};
 `;
 
 const SocialLinkContainer = styled.a`
@@ -78,33 +95,35 @@ export const PlacePage = page(() => (
 
         <PlaceInfoSection>
             <PlaceInfoContainer>
-                <InfoRow>
+                <InfoRow singleLine>
                     <PlaceRating title="Cafe Madrid Rio" type="Shopping mall" rating={5} />
                 </InfoRow>
-                <InfoRow>
+                <InfoRow singleLine>
                     <WithIcon icon="globe">
                         <a href="www.shoppingmallmadrid.com">www.shoppingmallmadrid.com</a>
                     </WithIcon>
                 </InfoRow>
 
-                <InfoRow>
+                <InfoRow singleLine>
                     <WithIcon icon="location-arrow">Madrid, Santa rose str., 15874, Spain</WithIcon>
                 </InfoRow>
 
                 <InfoRow>
                     <WithIcon icon="clock-o">09:00 - 18:00</WithIcon>
+                </InfoRow>
+                <InfoRow>
                     <WithIcon icon="cutlery">09:00 - 18:00</WithIcon>
                 </InfoRow>
 
-                <InfoRow>
+                <InfoRow singleLine>
                     <WithIcon icon="mobile">+375 29 452 59 63</WithIcon>
                 </InfoRow>
-                <SocialLink name="facebook-official" link="https://facebook.com" />
 
-                <SocialLink name="twitter" link="https://facebook.com" />
-
-                <SocialLink name="instagram" link="https://facebook.com" />
-                <InfoRow />
+                <InfoRow singleLine>
+                    <SocialLink name="facebook-official" link="https://facebook.com" />
+                    <SocialLink name="twitter" link="https://facebook.com" />
+                    <SocialLink name="instagram" link="https://facebook.com" />
+                </InfoRow>
             </PlaceInfoContainer>
         </PlaceInfoSection>
     </Container>

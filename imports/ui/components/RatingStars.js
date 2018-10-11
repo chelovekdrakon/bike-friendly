@@ -6,6 +6,10 @@ const Container = styled.div`
     width: 19rem;
     color: #d80027;
     font-size: 3rem;
+
+    @media (max-width: 700px) {
+        width: auto;
+    }
 `;
 
 export const RatingStars = ({ rating }) => (

@@ -13,6 +13,7 @@ const Container = styled.div`
     flex-direction: column;
     align-items: center;
     font-size: 1.8rem;
+    text-align: center;
 `;
 
 const FooterTitle = styled.h4`
@@ -32,6 +33,10 @@ const FooterContent = styled.div`
     justify-content: center;
     align-items: center;
     padding: 11rem 0;
+
+    @media (max-width: 700px) {
+        flex-direction: column;
+    }
 `;
 
 const FooterContentItem = styled.div`
@@ -57,6 +62,7 @@ const Contacts = styled.div`
 
 const LogoContainer = styled.div`
     width: 175px;
+    text-align: center;
 `;
 
 const SocialLinks = styled.div`

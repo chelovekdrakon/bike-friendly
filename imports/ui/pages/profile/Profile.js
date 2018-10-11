@@ -1,7 +1,6 @@
 import React from 'react';
 
 import styled from 'styled-components';
-import { Section } from '../../components/Section';
 import { MapPreview } from '../../components/MapPreview';
 import { ProfileInfo } from '../../components/ProfileInfo';
 import { ProfileGallerySlider } from '../../components/ProfileGallerySlider';
@@ -9,12 +8,25 @@ import { ProfileGalleryPicture } from '../../components/ProfileGallerySlider/Pro
 import { ImageCover } from '../../components/ImageConver';
 import { page } from '../../hocs/page';
 
-const Row = styled.div`
+const Wrapper = styled.div`
+    height: 100vh;
+
+    @media (max-width: 700px) {
+        height: 200vh;
+    }
+`;
+
+const Container = styled.div`
     height: 100%;
     display: flex;
+    flex: 1;
     flex-direction: row;
     align-self: stretch;
     font-size: 1.6rem;
+
+    @media (max-width: 700px) {
+        flex-direction: column;
+    }
 `;
 
 const Col = styled.div`
@@ -28,9 +40,9 @@ const Cell = styled.div`
 `;
 
 const Profile = ({ user, history }) => (
-    <Section>
+    <Wrapper>
         {user ? (
-            <Row>
+            <Container>
                 <Col>
                     <Cell weight={5}>
                         <ImageCover src="images/profile_pic.png" />
@@ -62,9 +74,9 @@ const Profile = ({ user, history }) => (
                         </ProfileGallerySlider>
                     </Cell>
                 </Col>
-            </Row>
+            </Container>
         ) : null}
-    </Section>
+    </Wrapper>
 );
 
 Profile.defaultProps = {};
