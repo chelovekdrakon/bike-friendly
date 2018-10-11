@@ -7,6 +7,16 @@ const Container = styled.div`
     background-size: cover;
     background-position: 50% 50%;
     position: relative;
+
+    @media (max-width: 700px) {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+
+    z-index: ${props => (props.isActive ? 100 : 0)};
 `;
 
 const TextContainer = styled.div`
@@ -17,6 +27,7 @@ const TextContainer = styled.div`
 
     h3 {
         margin-top: 0;
+        font-size: 2rem;
     }
 
     h3,
@@ -53,7 +64,7 @@ const ContentContainer = styled.div`
 `;
 
 export const CarouselItem = ({ imageUrl, isActive, title, text, children }) => (
-    <Container background={imageUrl}>
+    <Container background={imageUrl} isActive={isActive}>
         <TextContainer opacity={isActive ? 1 : 0}>
             <h3>{title}</h3>
             <p>{text}</p>

@@ -12,7 +12,7 @@ const Container = styled.div`
     ${props => posToDirectionMap[props.direction]}: 0;
     width: 60px;
     height: 100%;
-    z-index: 2;
+    z-index: 1000;
     display: flex;
     justify-content: center;
     align-items: center;

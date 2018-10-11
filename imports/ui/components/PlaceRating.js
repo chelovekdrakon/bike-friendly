@@ -8,6 +8,11 @@ const Container = styled.div`
     display: flex;
     color: ${BRAND_PRIMARY};
     align-items: center;
+
+    @media (max-width: 700px) {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 `;
 
 const PlaceDescription = styled.div`
@@ -33,6 +38,11 @@ const PlaceDescription = styled.div`
 
     span:last-child {
         padding-left: 3rem;
+    }
+
+    @media (max-width: 700px) {
+        width: auto;
+        padding-bottom: 2rem;
     }
 `;
 

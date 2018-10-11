@@ -16,7 +16,7 @@ const Body = styled.div`
 `;
 
 const SectionContent = styled(Section)`
-    max-width: 960px;
+    max-width: 85%;
     display: flex;
     flex-direction: column;
     justify-content: center;

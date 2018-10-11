@@ -13,6 +13,11 @@ const SliderContainer = styled.div`
         font-weight: bold;
         margin: 2rem 0;
         text-transform: uppercase;
+        font-size: 2rem;
+    }
+
+    @media (max-width: 700px) {
+        padding: 5.5rem 5.5rem;
     }
 `;
 
@@ -40,8 +45,8 @@ const BulletsContainer = styled.div`
 `;
 
 const Bullet = styled.div`
-    width: 10px;
-    height: 10px;
+    width: 15px;
+    height: 15px;
     cursor: pointer;
     background-color: ${BRAND_PRIMARY};
     border-radius: 50%;

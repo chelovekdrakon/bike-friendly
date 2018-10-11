@@ -16,6 +16,10 @@ const StyledLink = styled(Link)`
     &:visited {
         color: white;
     }
+
+    @media (max-width: 700px) {
+        padding: 1rem;
+    }
 `;
 
 const Container = styled.div`
@@ -33,7 +37,7 @@ const LogoutButton = styled.button`
     border: none;
     color: white;
     background-color: transparent;
-    font-size: 17px;
+    font-size: 1.8rem;
     text-transform: uppercase;
     outline: none;
     padding: 1rem;

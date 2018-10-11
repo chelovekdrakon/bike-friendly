@@ -47,18 +47,20 @@ const RatingContainer = styled.div`
     align-items: stretch;
     justify-content: center;
     max-width: 70%;
+
+    @media (max-width: 700px) {
+        max-width: 100%;
+        padding: 2rem;
+    }
 `;
 
 const Filters = styled.div`
     display: flex;
     padding: 13rem 0;
 
-    div {
-        margin-right: 3.3rem;
-
-        &:last-child {
-            margin-right: 0;
-        }
+    @media (max-width: 700px) {
+        flex-direction: column;
+        padding: 0;
     }
 `;
 
@@ -66,11 +68,21 @@ const Filter = styled.div`
     display: flex;
     flex: 1;
     flex-direction: column;
+    margin-right: 3.3rem;
+
+    &:last-child {
+        margin-right: 0;
+    }
 
     label {
         font-size: 2rem;
         color: #ececec;
         margin-bottom: 0.7rem;
+    }
+
+    @media (max-width: 700px) {
+        margin-bottom: 3rem;
+        margin-right: 0;
     }
 `;
 
@@ -78,6 +90,10 @@ const ControlsContainer = styled.div`
     padding-top: 13rem;
     display: flex;
     justify-content: center;
+
+    @media (max-width: 700px) {
+        padding: 3rem 0;
+    }
 `;
 
 class Map extends PureComponent {
