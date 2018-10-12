@@ -13,6 +13,12 @@ const Body = styled.div`
     display: flex;
     flex-direction: column;
     flex: 1;
+
+    & > div:first-child {
+        @media (max-width: 700px) {
+            padding: 5rem 1rem;
+        }
+    }
 `;
 
 const SectionContent = styled(Section)`
@@ -21,6 +27,14 @@ const SectionContent = styled(Section)`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    h1 {
+        font-size: 4rem;
+    }
+
+    p {
+        font-size: 2.5rem;
+    }
 `;
 
 const LoginButtonContainer = styled.div`

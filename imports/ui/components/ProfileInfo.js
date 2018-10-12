@@ -5,6 +5,11 @@ import styled from 'styled-components';
 const Container = styled.div`
     padding: 11rem 11rem 0 11rem;
     color: #3a8d27;
+    flex: 1;
+
+    @media (max-width: 700px) {
+        padding: 6rem 6rem 0 6rem;
+    }
 `;
 
 const InfoRow = styled.div`

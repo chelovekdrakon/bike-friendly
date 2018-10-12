@@ -28,6 +28,10 @@ const _RichButton = styled.div`
         background: linear-gradient(to bottom, #e3c009, #e3c009);
         transform: scale(1.1, 1.1);
     }
+
+    @media (max-width: 700px) {
+        padding: 1rem 5rem;
+    }
 `;
 
 export const RichButton = ({ text, onClick, small, theme = 'dark' }) => (

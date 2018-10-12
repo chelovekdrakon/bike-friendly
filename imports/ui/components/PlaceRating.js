@@ -11,7 +11,8 @@ const Container = styled.div`
 
     @media (max-width: 700px) {
         flex-direction: column;
-        align-items: flex-start;
+        flex: 1;
+        justify-content: center;
     }
 `;
 
@@ -30,6 +31,11 @@ const PlaceDescription = styled.div`
         max-width: 70%;
         overflow: hidden;
         text-overflow: ellipsis;
+
+        @media (max-width: 700px) {
+            text-align: center;
+            padding-right: 1rem;
+        }
     }
 
     span:first-child {
@@ -38,11 +44,17 @@ const PlaceDescription = styled.div`
 
     span:last-child {
         padding-left: 3rem;
+
+        @media (max-width: 700px) {
+            padding-right: 1rem;
+        }
     }
 
     @media (max-width: 700px) {
         width: auto;
         padding-bottom: 2rem;
+
+        white-space: normal;
     }
 `;
 

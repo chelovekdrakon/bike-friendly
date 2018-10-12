@@ -34,6 +34,10 @@ const TextContainer = styled.div`
     p {
         text-align: center;
     }
+
+    @media (max-width: 700px) {
+        padding: 4rem;
+    }
 `;
 
 const Overlay = styled.div`
@@ -53,7 +57,6 @@ const ContentContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 4rem;
     padding: 2rem;
     position: absolute;
     top: 0;

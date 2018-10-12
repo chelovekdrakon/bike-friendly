@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
+import Icon from 'react-fontawesome';
+import { BRAND_PRIMARY } from '../constants/colors';
 
 const ModalContainer = styled.div`
     position: fixed;
@@ -26,11 +28,22 @@ const Viewport = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 
     @media (max-width: 700px) {
         max-height: 100%;
         border-radius: 0;
     }
+`;
+
+const CloseButton = styled.div`
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+
+    font-size: 2.5rem;
+    color: ${BRAND_PRIMARY};
+    cursor: pointer;
 `;
 
 export class Modal extends React.Component {
@@ -40,18 +53,23 @@ export class Modal extends React.Component {
 
     render() {
         return ReactDOM.createPortal(
-            <ModalContainer opened={this.state.opened}>
-                <Viewport>{this.state.opened ? this.props.children : null}</Viewport>
+            <ModalContainer opened={this.state.opened} onClick={this.close}>
+                <Viewport onClick={e => e.stopPropagation()}>
+                    {this.state.opened ? this.props.children : null}
+                    <CloseButton onClick={this.close}>
+                        <Icon name="times-circle" />
+                    </CloseButton>
+                </Viewport>
             </ModalContainer>,
             document.querySelector('#modal-root')
         );
     }
 
-    open() {
+    open = () => {
         this.setState({ opened: true });
-    }
+    };
 
-    close() {
+    close = () => {
         this.setState({ opened: false });
-    }
+    };
 }
