@@ -7,6 +7,7 @@ const SliderContainer = styled.div`
     padding: 5.5rem 11rem;
     color: #3a8d27;
     height: 100%;
+    flex: 1;
 
     h4 {
         flex-grow: 0;

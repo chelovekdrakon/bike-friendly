@@ -31,6 +31,13 @@ const Container = styled.div`
     justify-content: space-between;
     color: white;
     font-size: 1.8rem;
+
+    @media (max-width: 700px) {
+        .user-menu > a,
+        .user-menu > span {
+            display: none;
+        }
+    }
 `;
 
 const LogoutButton = styled.button`
@@ -96,9 +103,9 @@ export class Header extends PureComponent {
     );
 
     renderUserMenu = ({ username }) => (
-        <div>
+        <div className="user-menu">
             <StyledLink to="/profile">{username}</StyledLink>
-            {'|'}
+            <span>{'|'}</span>
             <LogoutButton onClick={this.handleLogout}>CERRAR</LogoutButton>
         </div>
     );
